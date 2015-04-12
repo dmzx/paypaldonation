@@ -1,0 +1,38 @@
+services:
+    dmzx.donation.controller:
+        class: dmzx\donation\controller\donation
+        arguments:
+            - @dmzx.donation.render_helper
+            - @controller.helper
+            - @request
+    dmzx.donation.render_helper:
+        class: dmzx\donation\core\render_helper
+        arguments:
+            - @config
+            - @controller.helper
+            - @template
+            - @log
+            - @user
+            - @auth
+            - @dbal.conn
+            - @cache
+            - @request
+            - @pagination
+            - %core.root_path%
+            - %core.php_ext%
+            - %core.table_prefix%
+    dmzx.donation.listener:
+        class: dmzx\donation\event\listener
+        arguments:
+            - @dmzx.donation.render_helper
+            - @auth
+            - @config
+            - @controller.helper
+            - @template
+            - @user
+            - @dbal.conn
+            - %core.root_path%
+            - %core.php_ext%
+            - %core.table_prefix%
+        tags:
+            - { name: event.listener }
