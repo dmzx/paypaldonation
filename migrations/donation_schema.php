@@ -17,7 +17,7 @@ class donation_schema extends \phpbb\db\migration\migration
 	{
 		return array(
 			// Add configs
-			array('config.add', array('donation_version', '0.1.0')),
+			array('config.add', array('donation_version', '0.1.1')),
 			array('config.add', array('donation_enable', 1)),
 			array('config.add', array('donation_email', '')),
 			array('config.add', array('donation_achievement_enable', 0)),
