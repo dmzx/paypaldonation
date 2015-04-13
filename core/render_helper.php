@@ -14,15 +14,11 @@ class render_helper
 
 {
 	/**
-	 * CONSTANTS SECTION
-	 *
-	 * To access them, you need to use the class.
-	 *
-	 */
-	const DONATION_TABLE	= 'donation';
-	/**
-	 * End of constants
-	 */
+	* The database tables
+	*
+	* @var string
+	*/
+	protected $donation_table;
 	/** @var \phpbb\config\config */
 	protected $config;
 
@@ -70,7 +66,7 @@ class render_helper
 	 * @param									$phpEx
 	 * @param									$table_prefix
 	 */
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\log\log_interface $log, \phpbb\user $user, \phpbb\auth\auth $auth, \phpbb\db\driver\driver_interface $db, \phpbb\cache\service $cache, \phpbb\request\request $request, \phpbb\pagination $pagination, $phpbb_root_path, $phpEx, $table_prefix)
+	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\log\log_interface $log, \phpbb\user $user, \phpbb\auth\auth $auth, \phpbb\db\driver\driver_interface $db, \phpbb\cache\service $cache, \phpbb\request\request $request, \phpbb\pagination $pagination, $phpbb_root_path, $phpEx, $table_prefix, $donation_table)
 	{
 		$this->config = $config;
 		$this->helper = $helper;
@@ -85,6 +81,7 @@ class render_helper
 		$this->phpbb_log = $log;
 		$this->table_prefix = $table_prefix;
 		$this->pagination = $pagination;
+		$this->donation_table = $donation_table;
 
 		$this->ext_root_path = 'ext/dmzx/donation';
 	}
@@ -102,7 +99,7 @@ if (isset($this->config['donation_email']) && $this->config['donation_email'] ==
 	trigger_error($this->user->lang['DONATION_DISABLED_EMAIL'], E_USER_NOTICE);
 }
 
-$sql = 'SELECT * FROM ' . $this->table_prefix . self::DONATION_TABLE;
+$sql = 'SELECT * FROM ' . $this->donation_table;
 		$result = $this->db->sql_query($sql);
 		$donation = array();
 		while ($row = $this->db->sql_fetchrow($result))

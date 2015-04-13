@@ -1,3 +1,5 @@
+imports:
+    - { resource: tables.yml }
 services:
     dmzx.donation.controller:
         class: dmzx\donation\controller\donation
@@ -5,6 +7,23 @@ services:
             - @dmzx.donation.render_helper
             - @controller.helper
             - @request
+    dmzx.donation.admin.controller:
+        class: dmzx\donation\controller\admin_controller
+        arguments:
+            - @config
+            - @controller.helper
+            - @template
+            - @log
+            - @user
+            - @auth
+            - @dbal.conn
+            - @cache
+            - @request
+            - @pagination
+            - %core.root_path%
+            - %core.php_ext%
+            - %core.table_prefix%
+            - %dmzx.donation.table.donation%
     dmzx.donation.render_helper:
         class: dmzx\donation\core\render_helper
         arguments:
@@ -21,6 +40,7 @@ services:
             - %core.root_path%
             - %core.php_ext%
             - %core.table_prefix%
+            - %dmzx.donation.table.donation%
     dmzx.donation.listener:
         class: dmzx\donation\event\listener
         arguments:

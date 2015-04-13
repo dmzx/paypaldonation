@@ -1,0 +1,2 @@
+parameters:
+    dmzx.donation.table.donation: %core.table_prefix%donation

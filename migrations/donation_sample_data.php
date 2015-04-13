@@ -10,7 +10,7 @@
 
 namespace dmzx\donation\migrations;
 
-class donation_schema_1 extends \phpbb\db\migration\migration
+class donation_sample_data extends \phpbb\db\migration\migration
 {
 	static public function depends_on()
 	{
