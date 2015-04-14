@@ -20,8 +20,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 */
 class listener implements EventSubscriberInterface
 {
-	/** @var \dmzx\donation\core\render_helper */
-	protected $render_helper;
 	/** @var \phpbb\auth\auth */
 	protected $auth;
 	/** @var \phpbb\config\config */
@@ -41,9 +39,8 @@ class listener implements EventSubscriberInterface
 	/** @var \phpbb\controller\helper */
 	protected $controller_helper;
 
-	public function __construct(\dmzx\donation\core\render_helper $render_helper, \phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\db\driver\driver_interface $db, $root_path, $phpEx, $table_prefix)
+	public function __construct(\phpbb\auth\auth $auth, \phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\db\driver\driver_interface $db, $root_path, $phpEx, $table_prefix)
 	{
-		$this->render_helper = $render_helper;
 		$this->auth = $auth;
 		$this->config = $config;
 		$this->template = $template;

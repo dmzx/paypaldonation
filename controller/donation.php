@@ -12,36 +12,156 @@ namespace dmzx\donation\controller;
 
 class donation
 {
-	/** @var \dmzx\donation\core\render_helper */
-	protected $render_helper;
+	/**
+	* The database tables
+	*
+	* @var string
+	*/
+	protected $donation_table;
+	/** @var \phpbb\config\config */
+	protected $config;
 
 	/** @var \phpbb\controller\helper */
 	protected $helper;
 
+	/** @var \phpbb\template\template */
+	protected $template;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/** @var \phpbb\auth\auth */
+	protected $auth;
+
+	/** @var \phpbb\db\driver\driver_interface */
+	protected $db;
+
+	/** @var \phpbb\cache\service */
+	protected $cache;
+
 	/** @var \phpbb\request\request */
 	protected $request;
 
-	/**
-	* Constructor
-	*
-	 * @param \dmzx\mchat\core\render_helper	$render_helper
-	 * @param \phpbb\controller\helper			$helper
-	 * @param \phpbb\request\request			$request
-	*/
-	public function __construct(\dmzx\donation\core\render_helper $render_helper, \phpbb\controller\helper $helper, \phpbb\request\request $request)
-	{
-		$this->render_helper = $render_helper;
-		$this->helper = $helper;
-		$this->request = $request;
-	}
+	protected $phpbb_root_path;
+
+	protected $phpEx;
+
+	protected $table_prefix;
+	/** @var \phpbb\pagination */
+	protected $pagination;
 
 	/**
-	* Controller for donation
-	*
-	* @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
-	*/
+	 * Constructor
+	 *
+	 * @param \phpbb\config\config				$config
+	 * @param \phpbb\controller\helper			$helper
+	 * @param \phpbb\template\template			$template
+	 * @param \phpbb\user						$user
+	 * @param \phpbb\auth\auth					$auth
+	 * @param \phpbb\db\driver\driver_interface	$db
+	 * @param \phpbb\cache\service				$cache
+	 * @param \phpbb\request\request			$request
+	 * @param									$phpbb_root_path
+	 * @param									$phpEx
+	 * @param									$table_prefix
+	 */
+	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\log\log_interface $log, \phpbb\user $user, \phpbb\auth\auth $auth, \phpbb\db\driver\driver_interface $db, \phpbb\cache\service $cache, \phpbb\request\request $request, \phpbb\pagination $pagination, $phpbb_root_path, $phpEx, $table_prefix, $donation_table)
+	{
+		$this->config = $config;
+		$this->helper = $helper;
+		$this->template = $template;
+		$this->user = $user;
+		$this->auth = $auth;
+		$this->db = $db;
+		$this->cache = $cache;
+		$this->request = $request;
+		$this->phpbb_root_path = $phpbb_root_path;
+		$this->phpEx = $phpEx;
+		$this->phpbb_log = $log;
+		$this->table_prefix = $table_prefix;
+		$this->pagination = $pagination;
+		$this->donation_table = $donation_table;
+
+	}
+
 	public function handle()
 	{
-		$ret = $this->render_helper->render_data_for_page();
+
+	// Do we have the donation extension enabled
+
+	if (isset($this->config['donation_enable']) && $this->config['donation_enable'] == 0)
+	{
+	trigger_error($this->user->lang['DONATION_DISABLED'], E_USER_NOTICE);
 	}
+	if (isset($this->config['donation_email']) && $this->config['donation_email'] == '')
+	{
+	trigger_error($this->user->lang['DONATION_DISABLED_EMAIL'], E_USER_NOTICE);
+	}
+
+	$sql = 'SELECT * FROM ' . $this->donation_table;
+		$result = $this->db->sql_query($sql);
+		$donation = array();
+		while ($row = $this->db->sql_fetchrow($result))
+		{
+			$donation[$row['config_name']] = $row['config_value'];
+		}
+		$this->db->sql_freeresult($result);
+
+	$donation_body = isset($donation['donation_body']) ? $donation['donation_body'] : '';
+	$donation_cancel = isset($donation['donation_cancel']) ? $donation['donation_cancel'] : '';
+	$donation_success = isset($donation['donation_success']) ? $donation['donation_success'] : '';
+	$success_url = generate_board_url() . '/app.php/donation?mode=success';
+	$cancel_url = generate_board_url() . '/app.php/donation?mode=cancel';
+
+	$mode = request_var('mode', '');
+
+	switch ($mode)
+	{
+	  case 'success':
+
+		return $this->helper->render('donate/success_body.html', $this->user->lang('DONATION_SUCCESSFULL_TITLE'));
+
+	  break;
+
+	  case 'cancel':
+
+		return $this->helper->render('donate/cancel_body.html', $this->user->lang('DONATION_CANCELLED_TITLE'));
+
+	  break;
+
+	}
+
+	if (!empty($this->config['donation_goal_enable']) &&  $this->config['donation_goal'] > 0)
+	{
+		$donation_goal_number = ($this->config['donation_achievement'] * 100) / $this->config['donation_goal'];
+		$this->template->assign_vars(array(
+		'DONATION_GOAL_NUMBER'		   	=> round($donation_goal_number),
+	   ));
+	}
+
+	 // Lets build a page ...
+	$this->template->assign_vars(array(
+	'U_DONATE_SUCCESS'					=> $success_url,
+	'U_DONATE_CANCEL'					=> $cancel_url,
+	'DONATION_EMAIL'					=> $this->config['donation_email'],
+	'DONATION_ACHIEVEMENT_ENABLE'		=> $this->config['donation_achievement_enable'],
+	'DONATION_ACHIEVEMENT'				=> $this->config['donation_achievement'],
+	'DONATION_GOAL_ENABLE'				=> $this->config['donation_goal_enable'],
+	'DONATION_GOAL'						=> $this->config['donation_goal'],
+	'DONATION_GOAL_CURRENCY_ENABLE'		=> $this->config['donation_goal_currency_enable'],
+	'DONATION_GOAL_CURRENCY'			=> $this->config['donation_goal_currency'],
+	'DONATION_BODY'						=> html_entity_decode($donation_body),
+	'DONATION_CANCEL'					=> html_entity_decode($donation_cancel),
+	'DONATION_SUCCESS'					=> html_entity_decode($donation_success),
+	 ));
+
+	 // Set up Navlinks
+	$this->template->assign_block_vars('navlinks', array(
+	'FORUM_NAME' => $this->user->lang('DONATION_TITLE'),
+	'U_VIEW_FORUM' => $this->helper->route('dmzx_donation_controller'),
+	));
+
+	return $this->helper->render('donate/donate_body.html', $this->user->lang('DONATION_TITLE'));
+  }
+
 }

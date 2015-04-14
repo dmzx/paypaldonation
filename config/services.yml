@@ -4,12 +4,6 @@ services:
     dmzx.donation.controller:
         class: dmzx\donation\controller\donation
         arguments:
-            - @dmzx.donation.render_helper
-            - @controller.helper
-            - @request
-    dmzx.donation.admin.controller:
-        class: dmzx\donation\controller\admin_controller
-        arguments:
             - @config
             - @controller.helper
             - @template
@@ -24,8 +18,8 @@ services:
             - %core.php_ext%
             - %core.table_prefix%
             - %dmzx.donation.table.donation%
-    dmzx.donation.render_helper:
-        class: dmzx\donation\core\render_helper
+    dmzx.donation.admin.controller:
+        class: dmzx\donation\controller\admin_controller
         arguments:
             - @config
             - @controller.helper
@@ -44,7 +38,6 @@ services:
     dmzx.donation.listener:
         class: dmzx\donation\event\listener
         arguments:
-            - @dmzx.donation.render_helper
             - @auth
             - @config
             - @controller.helper
