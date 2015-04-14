@@ -115,21 +115,6 @@ class donation
 
 	$mode = request_var('mode', '');
 
-	switch ($mode)
-	{
-	  case 'success':
-
-		return $this->helper->render('donate/success_body.html', $this->user->lang('DONATION_SUCCESSFULL_TITLE'));
-
-	  break;
-
-	  case 'cancel':
-
-		return $this->helper->render('donate/cancel_body.html', $this->user->lang('DONATION_CANCELLED_TITLE'));
-
-	  break;
-
-	}
 
 	if (!empty($this->config['donation_goal_enable']) &&  $this->config['donation_goal'] > 0)
 	{
@@ -161,7 +146,27 @@ class donation
 	'U_VIEW_FORUM' => $this->helper->route('dmzx_donation_controller'),
 	));
 
-	return $this->helper->render('donate/donate_body.html', $this->user->lang('DONATION_TITLE'));
+	switch ($mode)
+	{
+	  case 'success':
+	  
+	    return $this->helper->render('donate/success_body.html', $this->user->lang('DONATION_SUCCESSFULL_TITLE'));
+	
+	  break;
+
+	  case 'cancel':
+	  
+	    return $this->helper->render('donate/cancel_body.html', $this->user->lang('DONATION_CANCELLED_TITLE'));
+	
+	  break;
+
+	  default;
+	  
+	   return $this->helper->render('donate/donate_body.html', $this->user->lang('DONATION_TITLE'));
+	  
+	  break;
+	  
+	}
   }
 
 }
