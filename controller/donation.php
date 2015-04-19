@@ -113,7 +113,7 @@ class donation
 	$success_url = generate_board_url() . '/app.php/donation?mode=success';
 	$cancel_url = generate_board_url() . '/app.php/donation?mode=cancel';
 
-	$mode = request_var('mode', '');
+	$mode = $this->request->variable('mode', '');
 
 
 	if (!empty($this->config['donation_goal_enable']) &&  $this->config['donation_goal'] > 0)
