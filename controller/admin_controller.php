@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 */
 class admin_controller
 {
-	   /**
+		/**
 	* The database tables
 	*
 	* @var string
@@ -110,7 +110,7 @@ class admin_controller
 			$this->set_options();
 
 		// Add option settings change action to the admin log
-		  $this->phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'DONATION_SAVED');
+			$this->phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'DONATION_SAVED');
 
 			trigger_error($this->user->lang['DONATION_SAVED'] . adm_back_link($this->u_action));
 
@@ -131,7 +131,7 @@ class admin_controller
 		$donation_success = isset($donation['donation_success']) ? $donation['donation_success'] : '';
 		$donation_version = isset($this->config['donation_version']) ? $this->config['donation_version'] : '';
 
-		   $this->template->assign_vars(array(
+			$this->template->assign_vars(array(
 			'DONATION_VERSION'					=> $donation_version,
 			'DONATION_ENABLE'					=> $this->config['donation_enable'],
 			'DONATION_INDEX_ENABLE'				=> $this->config['donation_index_enable'],
@@ -170,7 +170,7 @@ class admin_controller
 				$this->config->set('donation_achievement_enable', $this->request->variable('donation_achievement_enable', 0));
 				$this->config->set('donation_achievement', $this->request->variable('donation_achievement', ''));
 				$this->config->set('donation_goal_currency_enable', $this->request->variable('donation_goal_currency_enable', 0));
-				$this->config->set('donation_goal_currency', $this->request->variable('donation_goal_currency', ''));
+				$this->config->set('donation_goal_currency', utf8_normalize_nfc($this->request->variable('donation_goal_currency', '', true)));
 
 	}
 

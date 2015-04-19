@@ -35,7 +35,7 @@ class donation_module
 		switch($mode)
 		{
 			case 'configuration':
-			   // Load a template from adm/style for our ACP page
+				// Load a template from adm/style for our ACP page
 				$this->tpl_name = 'acp_donation';
 				// Set the page title for our ACP page
 				$this->page_title = $user->lang['ACP_DONATION_MOD'];

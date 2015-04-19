@@ -57,7 +57,7 @@ class listener implements EventSubscriberInterface
 		return array(
 			'core.viewonline_overwrite_location'	=> 'add_page_viewonline',
 			'core.page_header'	=> 'add_page_header_links',
-			'core.user_setup'   => 'load_language_on_setup',
+			'core.user_setup'	=> 'load_language_on_setup',
 
 		);
 	}
@@ -65,11 +65,11 @@ class listener implements EventSubscriberInterface
 	public function add_page_viewonline($event)
 	{
 	global $user, $phpbb_container, $phpEx;
-	   if (strrpos($event['row']['session_page'], 'app.' . $phpEx . '/donation') === 0)
-	   {
+		if (strrpos($event['row']['session_page'], 'app.' . $phpEx . '/donation') === 0)
+		{
 		$event['location'] = $user->lang('VIEWING_DONATE');
 		$event['location_url'] = $phpbb_container->get('controller.helper')->route('dmzx_donation_controller');
-	   }
+		}
 	}
 
 	public function add_page_header_links($event)
@@ -88,12 +88,12 @@ class listener implements EventSubscriberInterface
 	'S_DONATE_ENABLED'		=> (isset($this->config['donation_enable'])) ? $this->config['donation_enable']:false,
 	));
 
-	 if (!empty($this->config['donation_goal_enable']) &&  $this->config['donation_goal'] > 0)
+	 if (!empty($this->config['donation_goal_enable']) &&	$this->config['donation_goal'] > 0)
 	 {
 	 $donation_goal_number = ($this->config['donation_achievement'] * 100) / $this->config['donation_goal'];
 	 $donation_goal_rest = $this->config['donation_goal'] - $this->config['donation_achievement'];
 	 $this->template->assign_vars(array(
-	'DONATION_GOAL_NUMBER'		   => round($donation_goal_number),
+	'DONATION_GOAL_NUMBER'			=> round($donation_goal_number),
 	'DONATION_GOAL_REST'				=> $donation_goal_rest,
 	 ));
 	}

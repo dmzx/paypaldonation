@@ -115,13 +115,12 @@ class donation
 
 	$mode = $this->request->variable('mode', '');
 
-
-	if (!empty($this->config['donation_goal_enable']) &&  $this->config['donation_goal'] > 0)
+	if (!empty($this->config['donation_goal_enable']) &&	$this->config['donation_goal'] > 0)
 	{
 		$donation_goal_number = ($this->config['donation_achievement'] * 100) / $this->config['donation_goal'];
 		$this->template->assign_vars(array(
-		'DONATION_GOAL_NUMBER'		   	=> round($donation_goal_number),
-	   ));
+		'DONATION_GOAL_NUMBER'				=> round($donation_goal_number),
+		));
 	}
 
 	 // Lets build a page ...
@@ -148,25 +147,25 @@ class donation
 
 	switch ($mode)
 	{
-	  case 'success':
-	  
-	    return $this->helper->render('donate/success_body.html', $this->user->lang('DONATION_SUCCESSFULL_TITLE'));
-	
-	  break;
+		case 'success':
 
-	  case 'cancel':
-	  
-	    return $this->helper->render('donate/cancel_body.html', $this->user->lang('DONATION_CANCELLED_TITLE'));
-	
-	  break;
+		return $this->helper->render('donate/success_body.html', $this->user->lang('DONATION_SUCCESSFULL_TITLE'));
 
-	  default;
-	  
-	   return $this->helper->render('donate/donate_body.html', $this->user->lang('DONATION_TITLE'));
-	  
-	  break;
-	  
+		break;
+
+		case 'cancel':
+
+		return $this->helper->render('donate/cancel_body.html', $this->user->lang('DONATION_CANCELLED_TITLE'));
+
+		break;
+
+		default;
+
+		return $this->helper->render('donate/donate_body.html', $this->user->lang('DONATION_TITLE'));
+
+		break;
+
 	}
-  }
+	}
 
 }

@@ -3,19 +3,19 @@
 <h2>{L_DONATION_TITLE_HEAD} {SITENAME}</h2>
 
 <div class="panel">
-   <div class="inner"><span class="corners-top"><span></span></span>
+	<div class="inner"><span class="corners-top"><span></span></span>
 		<!-- IF DONATION_GOAL_ENABLE and DONATION_ACHIEVEMENT_ENABLE and DONATION_GOAL > 0 -->
-		<div style="background:url('{BOARD_URL}ext/dmzx/donation/styles/prosilver/theme/images/prog_grey.png') repeat-x; background-color: #cccccc; border: 1px solid black; border-radius: 6px;   -moz-border-radius: 6px; -webkit-border-radius: 6px; width:100%; margin-top: 2px;"><div style="background:url('{BOARD_URL}ext/dmzx/donation/styles/prosilver/theme/images/prog_<!-- IF DONATION_GOAL_NUMBER < 34 -->red<!-- ELSEIF DONATION_GOAL_NUMBER < 67 -->yellow<!-- ELSE -->green<!-- ENDIF -->.png') repeat-x;background-color: #008040; color: white; font-weight:bold; max-width:100%;<!-- IF DONATION_GOAL_NUMBER < 100 --> border-right: 1px solid black;<!-- ENDIF -->  width:{DONATION_GOAL_NUMBER}%; height:24px; border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px;"><span style="padding-left:10px; font-size:18px;">{DONATION_GOAL_NUMBER}<!-- IF DONATION_GOAL_NUMBER >= 5 -->%<!-- ENDIF --></span></div></div>
+		<div style="background:url('{BOARD_URL}ext/dmzx/donation/styles/prosilver/theme/images/prog_grey.png') repeat-x; background-color: #cccccc; border: 1px solid black; border-radius: 6px;	-moz-border-radius: 6px; -webkit-border-radius: 6px; width:100%; margin-top: 2px;"><div style="background:url('{BOARD_URL}ext/dmzx/donation/styles/prosilver/theme/images/prog_<!-- IF DONATION_GOAL_NUMBER < 34 -->red<!-- ELSEIF DONATION_GOAL_NUMBER < 67 -->yellow<!-- ELSE -->green<!-- ENDIF -->.png') repeat-x;background-color: #008040; color: white; font-weight:bold; max-width:100%;<!-- IF DONATION_GOAL_NUMBER < 100 --> border-right: 1px solid black;<!-- ENDIF -->	width:{DONATION_GOAL_NUMBER}%; height:24px; border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px;"><span style="padding-left:10px; font-size:18px;">{DONATION_GOAL_NUMBER}<!-- IF DONATION_GOAL_NUMBER >= 5 -->%<!-- ENDIF --></span></div></div>
 		<!-- ENDIF -->
 		<!-- IF DONATION_ACHIEVEMENT_ENABLE or DONATION_GOAL_ENABLE -->
 		<p style="margin-top:10px; font-size:1.5em; text-align:center;"><!-- IF DONATION_ACHIEVEMENT_ENABLE -->{L_WE_HAVE_ACHIEVED} <strong><!-- IF DONATION_ACHIEVEMENT > 0 -->{DONATION_ACHIEVEMENT}<!-- ELSE -->{DONATION_GOAL_NUMBER}<!-- ENDIF --></strong><!-- IF DONATION_GOAL_CURRENCY_ENABLE --> {DONATION_GOAL_CURRENCY}<!-- ENDIF --> {L_WE_HAVE_ACHIEVED_IN}<!-- ENDIF --><!-- IF DONATION_GOAL_ENABLE and DONATION_GOAL > 0 --> {L_OUR_DONATION_GOAL} <strong>{DONATION_GOAL}</strong><!-- IF DONATION_GOAL_CURRENCY_ENABLE --> {DONATION_GOAL_CURRENCY}<!-- ENDIF -->.<!-- ENDIF --></p><hr />
 		<!-- ENDIF -->
 		<!-- IF DONATION_BODY -->{DONATION_BODY}<!-- ELSE --><p>{L_DONATION_BODY_DEFAULT}</p><!-- IF U_ACP --><p><em>{L_DONATION_ADMIN_DEFAULT}</em></p><!-- ENDIF --><!-- ENDIF -->
-   <span class="corners-bottom"><span></span></span></div>
+	<span class="corners-bottom"><span></span></span></div>
 </div>
 
 <div class="panel">
-   <div class="inner"><span class="corners-top"><span></span></span>
+	<div class="inner"><span class="corners-top"><span></span></span>
 	<div style="text-align:center; padding-top:6px;">
 		<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 		<div>
@@ -49,7 +49,7 @@
 		</fieldset>
 		</form>
 	</div>
-   <span class="corners-bottom"><span></span></span></div>
+	<span class="corners-bottom"><span></span></span></div>
 </div>
 
 <!-- INCLUDE overall_footer.html -->
