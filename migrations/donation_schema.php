@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* @package phpBB Extension - PhpBB Paypal Donation
+* @package phpBB Extension - phpBB Paypal Donation
 * @copyright (c) 2015 dmzx - http://www.dmzx-web.net
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 * @Author Stoker - http://www.phpbb3bbcodes.com
@@ -29,11 +29,10 @@ class donation_schema extends \phpbb\db\migration\migration
 			array('config.add', array('donation_index_enable', 0)),
 			array('config.add', array('donation_index_top', 0)),
 			array('config.add', array('donation_index_bottom', 0)),
-
 		);
 	}
 
-		public function update_schema()
+	public function update_schema()
 	{
 		return array(
 			'add_tables'	=> array(
@@ -48,7 +47,7 @@ class donation_schema extends \phpbb\db\migration\migration
 		);
 	}
 
-		public function revert_schema()
+	public function revert_schema()
 	{
 		return array(
 			'drop_tables'	=> array(
@@ -56,5 +55,4 @@ class donation_schema extends \phpbb\db\migration\migration
 			),
 		);
 	}
-
 }

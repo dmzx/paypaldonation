@@ -5,7 +5,11 @@
 	"homepage": "http://www.dmzx-web.net",
 	"version": "0.1.4",
 	"time": "2015-04-12",
-	"keywords": ["phpbb", "extension", "donation"],
+	"keywords": [
+		"phpbb",
+		"extension",
+		"donation"
+	],
 	"license": "GPL-2.0",
 	"authors": [
 		{
@@ -27,6 +31,11 @@
 		"display-name": "Paypal Donation",
 		"soft-require": {
 			"phpbb/phpbb": "3.1.*"
+		},
+		"version-check": {
+			"host": "www.phpbb.com",
+			"directory": "/customise/db/extension/paypal_donation",
+			"filename": "version_check"
 		}
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* @package phpBB Extension - PhpBB Paypal Donation
+* @package phpBB Extension - phpBB Paypal Donation
 * @copyright (c) 2015 dmzx - http://www.dmzx-web.net
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 * @Author Stoker - http://www.phpbb3bbcodes.com
@@ -19,12 +19,13 @@ class donation_sample_data extends \phpbb\db\migration\migration
 		);
 	}
 
-		public function update_data()
+	public function update_data()
 	{
 		return array(
 			array('custom', array(array($this, 'insert_sample_data'))),
 		);
 	}
+
 	public function insert_sample_data()
 	{
 		global $user;

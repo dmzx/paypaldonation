@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* @package phpBB Extension - PhpBB Paypal Donation
+* @package phpBB Extension - phpBB Paypal Donation
 * @copyright (c) 2015 dmzx - http://www.dmzx-web.net
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 * @Author Stoker - http://www.phpbb3bbcodes.com
@@ -16,7 +16,6 @@ class donation_module
 
 	function main($id, $mode)
 	{
-
 		global $phpbb_container, $request, $user;
 
 		// Get an instance of the admin controller
@@ -43,7 +42,6 @@ class donation_module
 				$admin_controller->display_options();
 
 			break;
-
 		}
 	}
 }

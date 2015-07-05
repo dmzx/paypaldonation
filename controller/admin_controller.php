@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* @package phpBB Extension - PhpBB Paypal Donation
+* @package phpBB Extension - phpBB Paypal Donation
 * @copyright (c) 2015 dmzx - http://www.dmzx-web.net
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 * @Author Stoker - http://www.phpbb3bbcodes.com
@@ -17,17 +17,15 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 */
 class admin_controller
 {
-		/**
+	/**
 	* The database tables
 	*
 	* @var string
 	*/
 	protected $donation_table;
+
 	/** @var \phpbb\config\config */
 	protected $config;
-
-	/** @var \phpbb\controller\helper */
-	protected $helper;
 
 	/** @var \phpbb\template\template */
 	protected $template;
@@ -35,42 +33,29 @@ class admin_controller
 	/** @var \phpbb\user */
 	protected $user;
 
-	/** @var \phpbb\auth\auth */
-	protected $auth;
-
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
-
-	/** @var \phpbb\cache\service */
-	protected $cache;
 
 	/** @var \phpbb\request\request */
 	protected $request;
 
-	protected $phpbb_root_path;
-
-	protected $phpEx;
-
-	protected $table_prefix;
-	/** @var \phpbb\pagination */
-	protected $pagination;
-
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\log\log_interface $log, \phpbb\user $user, \phpbb\auth\auth $auth, \phpbb\db\driver\driver_interface $db, \phpbb\cache\service $cache, \phpbb\request\request $request, \phpbb\pagination $pagination, $phpbb_root_path, $phpEx, $table_prefix, $donation_table)
+	/**
+	 * Constructor
+	 *
+	 * @param \phpbb\config\config				$config
+	 * @param \phpbb\template\template			$template
+	 * @param \phpbb\user						$user
+	 * @param \phpbb\db\driver\driver_interface	$db
+	 * @param \phpbb\request\request			$request
+	 */
+	public function __construct(\phpbb\config\config $config, \phpbb\template\template $template, \phpbb\log\log_interface $log, \phpbb\user $user, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, $donation_table)
 	{
-
 		$this->config = $config;
-		$this->helper = $helper;
 		$this->template = $template;
-		$this->user = $user;
-		$this->auth = $auth;
-		$this->db = $db;
-		$this->cache = $cache;
-		$this->request = $request;
-		$this->phpbb_root_path = $phpbb_root_path;
-		$this->phpEx = $phpEx;
 		$this->phpbb_log = $log;
-		$this->table_prefix = $table_prefix;
-		$this->pagination = $pagination;
+		$this->user = $user;
+		$this->db = $db;
+		$this->request = $request;
 		$this->donation_table = $donation_table;
 	}
 
@@ -93,31 +78,32 @@ class admin_controller
 			}
 
 			$donation_row = array(
-			'donation_body' 			=> utf8_normalize_nfc($this->request->variable('donation_body', '', true)),
-			'donation_cancel' 			=> utf8_normalize_nfc($this->request->variable('donation_cancel', '', true)),
-			'donation_success' 			=> utf8_normalize_nfc($this->request->variable('donation_success', '', true)),
+				'donation_body' 			=> utf8_normalize_nfc($this->request->variable('donation_body', '', true)),
+				'donation_cancel' 			=> utf8_normalize_nfc($this->request->variable('donation_cancel', '', true)),
+				'donation_success' 			=> utf8_normalize_nfc($this->request->variable('donation_success', '', true)),
 			 );
 
 			foreach ($donation_row as $this->config_name => $this->config_value)
-				{
-					$sql = 'UPDATE ' . $this->donation_table . "
-						SET config_value = '" . $this->db->sql_escape($this->config_value) . "'
-						WHERE config_name = '" . $this->db->sql_escape($this->config_name) . "'";
-					$this->db->sql_query($sql);
-				}
+			{
+				$sql = 'UPDATE ' . $this->donation_table . "
+					SET config_value = '" . $this->db->sql_escape($this->config_value) . "'
+					WHERE config_name = '" . $this->db->sql_escape($this->config_name) . "'";
+				$this->db->sql_query($sql);
+			}
 
 			// Set the options the user configured
 			$this->set_options();
 
 		// Add option settings change action to the admin log
-			$this->phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'DONATION_SAVED');
+		$this->phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'DONATION_SAVED');
 
-			trigger_error($this->user->lang['DONATION_SAVED'] . adm_back_link($this->u_action));
+		trigger_error($this->user->lang['DONATION_SAVED'] . adm_back_link($this->u_action));
 
 		}
 
 		// let's get it on
-		$sql = 'SELECT * FROM ' . $this->donation_table;
+		$sql = 'SELECT *
+		FROM ' . $this->donation_table;
 		$result = $this->db->sql_query($sql);
 		$donation = array();
 		while ($row = $this->db->sql_fetchrow($result))
@@ -131,7 +117,7 @@ class admin_controller
 		$donation_success = isset($donation['donation_success']) ? $donation['donation_success'] : '';
 		$donation_version = isset($this->config['donation_version']) ? $this->config['donation_version'] : '';
 
-			$this->template->assign_vars(array(
+		$this->template->assign_vars(array(
 			'DONATION_VERSION'					=> $donation_version,
 			'DONATION_ENABLE'					=> $this->config['donation_enable'],
 			'DONATION_INDEX_ENABLE'				=> $this->config['donation_index_enable'],
@@ -160,18 +146,17 @@ class admin_controller
 	*/
 	protected function set_options()
 	{
-				$this->config->set('donation_enable', $this->request->variable('donation_enable', 1));
-				$this->config->set('donation_index_enable', $this->request->variable('donation_index_enable', 0));
-				$this->config->set('donation_index_top', $this->request->variable('donation_index_top', 0));
-				$this->config->set('donation_index_bottom', $this->request->variable('donation_index_bottom', 0));
-				$this->config->set('donation_email', $this->request->variable('donation_email', ''));
-				$this->config->set('donation_goal_enable', $this->request->variable('donation_goal_enable', 0));
-				$this->config->set('donation_goal', $this->request->variable('donation_goal', ''));
-				$this->config->set('donation_achievement_enable', $this->request->variable('donation_achievement_enable', 0));
-				$this->config->set('donation_achievement', $this->request->variable('donation_achievement', ''));
-				$this->config->set('donation_goal_currency_enable', $this->request->variable('donation_goal_currency_enable', 0));
-				$this->config->set('donation_goal_currency', utf8_normalize_nfc($this->request->variable('donation_goal_currency', '', true)));
-
+		$this->config->set('donation_enable', $this->request->variable('donation_enable', 1));
+		$this->config->set('donation_index_enable', $this->request->variable('donation_index_enable', 0));
+		$this->config->set('donation_index_top', $this->request->variable('donation_index_top', 0));
+		$this->config->set('donation_index_bottom', $this->request->variable('donation_index_bottom', 0));
+		$this->config->set('donation_email', $this->request->variable('donation_email', ''));
+		$this->config->set('donation_goal_enable', $this->request->variable('donation_goal_enable', 0));
+		$this->config->set('donation_goal', $this->request->variable('donation_goal', ''));
+		$this->config->set('donation_achievement_enable', $this->request->variable('donation_achievement_enable', 0));
+		$this->config->set('donation_achievement', $this->request->variable('donation_achievement', ''));
+		$this->config->set('donation_goal_currency_enable', $this->request->variable('donation_goal_currency_enable', 0));
+		$this->config->set('donation_goal_currency', utf8_normalize_nfc($this->request->variable('donation_goal_currency', '', true)));
 	}
 
 	/**
