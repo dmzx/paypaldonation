@@ -78,9 +78,9 @@ class admin_controller
 			}
 
 			$donation_row = array(
-				'donation_body' 			=> utf8_normalize_nfc($this->request->variable('donation_body', '', true)),
-				'donation_cancel' 			=> utf8_normalize_nfc($this->request->variable('donation_cancel', '', true)),
-				'donation_success' 			=> utf8_normalize_nfc($this->request->variable('donation_success', '', true)),
+				'donation_body' 			=> $this->request->variable('donation_body', '', true),
+				'donation_cancel' 			=> $this->request->variable('donation_cancel', '', true),
+				'donation_success' 			=> $this->request->variable('donation_success', '', true),
 			 );
 
 			foreach ($donation_row as $this->config_name => $this->config_value)
@@ -156,7 +156,7 @@ class admin_controller
 		$this->config->set('donation_achievement_enable', $this->request->variable('donation_achievement_enable', 0));
 		$this->config->set('donation_achievement', $this->request->variable('donation_achievement', ''));
 		$this->config->set('donation_goal_currency_enable', $this->request->variable('donation_goal_currency_enable', 0));
-		$this->config->set('donation_goal_currency', utf8_normalize_nfc($this->request->variable('donation_goal_currency', '', true)));
+		$this->config->set('donation_goal_currency', $this->request->variable('donation_goal_currency', '', true));
 	}
 
 	/**
