@@ -12,7 +12,6 @@ namespace dmzx\donation\migrations;
 
 class donation_schema extends \phpbb\db\migration\migration
 {
-
 	public function update_data()
 	{
 		return array(

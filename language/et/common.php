@@ -8,6 +8,7 @@
 * Estonian translation by phpBBeesti.com - (http://www.phpbbeesti.com/)
 *
 */
+
 /**
 * DO NOT CHANGE
 */
@@ -15,6 +16,7 @@ if (!defined('IN_PHPBB'))
 {
 	exit;
 }
+
 if (empty($lang) || !is_array($lang))
 {
 	$lang = array();

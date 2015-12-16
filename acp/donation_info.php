@@ -11,10 +11,10 @@
 namespace dmzx\donation\acp;
 
 class donation_info
- {
+{
 	function module()
 	{
-		 return array(
+		return array(
 			'filename'	=> '\dmzx\donation\acp\donation_module',
 			'title'		=> 'ACP_DONATION_MOD',
 			'modes'		=> array(
