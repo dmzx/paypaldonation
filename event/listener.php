@@ -10,14 +10,8 @@
 
 namespace dmzx\donation\event;
 
-/**
-* @ignore
-*/
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-/**
-* Event listener
-*/
 class listener implements EventSubscriberInterface
 {
 	/** @var \phpbb\config\config */
@@ -27,7 +21,13 @@ class listener implements EventSubscriberInterface
 	protected $template;
 
 	/** @var \phpbb\controller\helper */
-	protected $controller_helper;
+	protected $helper;
+
+	/** @var \phpbb\user */
+	protected $user;
+
+	/** @var string phpEx */
+	protected $php_ext;
 
 	/**
 	* Constructor
@@ -35,30 +35,36 @@ class listener implements EventSubscriberInterface
 	* @param \phpbb\config\config				$config
 	* @param \phpbb\controller\helper			$helper
 	* @param \phpbb\template\template			$template
+	* @param \phpbb\user						$user
+	* @param string							 $php_ext
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $controller_helper, \phpbb\template\template $template)
+	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, $php_ext)
 	{
-		$this->config = $config;
-		$this->controller_helper = $controller_helper;
-		$this->template = $template;
+		$this->config 				= $config;
+		$this->helper 				= $helper;
+		$this->template 			= $template;
+		$this->user 				= $user;
+		$this->php_ext	 			= $php_ext;
 	}
 
 	static public function getSubscribedEvents()
 	{
 		return array(
-			'core.viewonline_overwrite_location'	=> 'add_page_viewonline',
-			'core.page_header'	=> 'add_page_header_links',
-			'core.user_setup'	=> 'load_language_on_setup',
+			'core.viewonline_overwrite_location'	=> 'viewonline_page',
+			'core.page_header'						=> 'add_page_header_links',
+			'core.user_setup'						=> 'load_language_on_setup',
 		);
 	}
 
-	public function add_page_viewonline($event)
+	public function viewonline_page($event)
 	{
-		global $user, $phpbb_container, $phpEx;
-		if (strrpos($event['row']['session_page'], 'app.' . $phpEx . '/donation') === 0)
+		if ($event['on_page'][1] == 'app')
 		{
-			$event['location'] = $user->lang('VIEWING_DONATE');
-			$event['location_url'] = $phpbb_container->get('controller.helper')->route('dmzx_donation_controller');
+			if (strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/donation') === 0)
+			{
+				$event['location'] = $this->user->lang('VIEWING_DONATE');
+				$event['location_url'] = $this->helper->route('dmzx_donation_controller');
+			}
 		}
 	}
 
@@ -66,7 +72,7 @@ class listener implements EventSubscriberInterface
 	{
 		$this->template->assign_vars(array(
 			'DONATION_ACHIEVEMENT_ENABLE'		=> (isset($this->config['donation_achievement_enable'])) ? $this->config['donation_achievement_enable']:false,
-			'DONATION_ACHIEVEMENT'				=> (isset($this->config['donation_achievement'])) ? $this->config['donation_achievement']:false,
+			'DONATION_ACHIEVEMENT'				=> (isset($this->config['donation_achievement'])) ? $this->config[	'donation_achievement']:false,
 			'DONATION_INDEX_ENABLE'				=> (isset($this->config['donation_index_enable'])) ? $this->config['donation_index_enable']:false,
 			'DONATION_INDEX_TOP'				=> (isset($this->config['donation_index_top'])) ? $this->config['donation_index_top']:false,
 			'DONATION_INDEX_BOTTOM'				=> (isset($this->config['donation_index_bottom'])) ? $this->config['donation_index_bottom']:false,
@@ -87,7 +93,7 @@ class listener implements EventSubscriberInterface
 			));
 		}
 		$this->template->assign_vars(array(
-			'U_DONATE' => $this->controller_helper->route('dmzx_donation_controller'),
+			'U_DONATE' => $this->helper->route('dmzx_donation_controller'),
 		));
 	}
 

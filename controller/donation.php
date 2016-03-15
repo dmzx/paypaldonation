@@ -12,12 +12,6 @@ namespace dmzx\donation\controller;
 
 class donation
 {
-	/**
-	* The database tables
-	*
-	* @var string
-	*/
-	protected $donation_table;
 	/** @var \phpbb\config\config */
 	protected $config;
 
@@ -37,6 +31,13 @@ class donation
 	protected $request;
 
 	/**
+	* The database tables
+	*
+	* @var string
+	*/
+	protected $donation_table;
+
+	/**
 	* Constructor
 	*
 	* @param \phpbb\config\config				$config
@@ -45,16 +46,17 @@ class donation
 	* @param \phpbb\user						$user
 	* @param \phpbb\db\driver\driver_interface	$db
 	* @param \phpbb\request\request				$request
+	* @param 									$donation_table
 	*/
 	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, $donation_table)
 	{
-		$this->config = $config;
-		$this->helper = $helper;
-		$this->template = $template;
-		$this->user = $user;
-		$this->db = $db;
-		$this->request = $request;
-		$this->donation_table = $donation_table;
+		$this->config 			= $config;
+		$this->helper 			= $helper;
+		$this->template 		= $template;
+		$this->user 			= $user;
+		$this->db 				= $db;
+		$this->request 			= $request;;
+		$this->donation_table 	= $donation_table;
 	}
 
 	public function handle()
@@ -71,7 +73,7 @@ class donation
 		}
 
 		$sql = 'SELECT *
-		FROM ' . $this->donation_table;
+			FROM ' . $this->donation_table;
 		$result = $this->db->sql_query($sql);
 		$donation = array();
 		while ($row = $this->db->sql_fetchrow($result))
@@ -83,8 +85,8 @@ class donation
 		$donation_body = isset($donation['donation_body']) ? $donation['donation_body'] : '';
 		$donation_cancel = isset($donation['donation_cancel']) ? $donation['donation_cancel'] : '';
 		$donation_success = isset($donation['donation_success']) ? $donation['donation_success'] : '';
-		$success_url = generate_board_url() . '/app.php/donation?mode=success';
-		$cancel_url = generate_board_url() . '/app.php/donation?mode=cancel';
+		$success_url = $this->generate_return_url('success');
+		$cancel_url = $this->generate_return_url('cancel');
 
 		$mode = $this->request->variable('mode', '');
 
@@ -130,5 +132,13 @@ class donation
 				return $this->helper->render('donate/donate_body.html', $this->user->lang('DONATION_TITLE'));
 			break;
 		}
+	}
+
+	/**
+	* Generate return URL
+	*/
+	private function generate_return_url($arg)
+	{
+		return generate_board_url(true) . $this->helper->route('dmzx_donation_controller', array('mode' => $arg));
 	}
 }

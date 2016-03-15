@@ -48,7 +48,7 @@
 		<dl>
 			<dt><label for="donation_achievement">{L_DONATION_ACHIEVEMENT}{L_COLON}</label><br />
 			<span>{L_DONATION_ACHIEVEMENT_EXPLAIN}</span></dt>
-			<dd><input type="number" class="inputbox" name="donation_achievement" size="10" value="{DONATION_ACHIEVEMENT}" /></dd>
+			<dd><input type="text" name="donation_achievement" size="10" value="{DONATION_ACHIEVEMENT}" /></dd>
 		</dl>
 		<dl>
 			<dt><label for="donation_goal_enable">{L_DONATION_GOAL_ENABLE}{L_COLON}</label><br />
@@ -59,11 +59,11 @@
 		<dl>
 			<dt><label for="donation_goal">{L_DONATION_GOAL}{L_COLON}</label><br />
 			<span>{L_DONATION_GOAL_EXPLAIN}</span></dt>
-			<dd><input type="number" class="inputbox" name="donation_goal" size="10" value="{DONATION_GOAL}" /></dd>
+			<dd><input type="text" name="donation_goal" size="10" value="{DONATION_GOAL}" /></dd>
 		</dl>
 		<dl>
 			<dt><label for="donation_goal_currency_enable">{L_DONATION_GOAL_CURRENCY_ENABLE}{L_COLON}</label><br />
-			<span>{L_DONATION_GOAL_CURRENCY_ENABLE_EXPLAIN}</span></dt>
+ 			<span>{L_DONATION_GOAL_CURRENCY_ENABLE_EXPLAIN}</span></dt>
 			<dd><label><input type="radio" class="radio" name="donation_goal_currency_enable" value="1"<!-- IF DONATION_GOAL_CURRENCY_ENABLE --> id="donation_goal_currency_enable" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
 			<label><input type="radio" class="radio" name="donation_goal_currency_enable" value="0"<!-- IF not DONATION_GOAL_CURRENCY_ENABLE --> id="donation_goal_currency_enable" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
 		</dl>
@@ -76,7 +76,7 @@
 
 	<fieldset>
 		<legend>{L_DONATION_BODY_SETTINGS}</legend>
-		<dl>
+			<dl>
 				<dt><label for="donation_body">{L_DONATION_BODY}{L_COLON}</label><br />
 				<span>{L_DONATION_BODY_EXPLAIN}</span></dt>
 				<dd><textarea id="donation_body" name="donation_body" rows="8" cols="45">{DONATION_BODY}</textarea></dd>
@@ -85,7 +85,7 @@
 
 	<fieldset>
 		<legend>{L_DONATION_SUCCESS_SETTINGS}</legend>
-		<dl>
+			<dl>
 				<dt><label for="donation_success">{L_DONATION_SUCCESS}{L_COLON}</label><br />
 				<span>{L_DONATION_SUCCESS_EXPLAIN}</span></dt>
 				<dd><textarea id="donation_success" name="donation_success" rows="8" cols="45">{DONATION_SUCCESS}</textarea></dd>
@@ -94,7 +94,7 @@
 
 	<fieldset>
 		<legend>{L_DONATION_CANCEL_SETTINGS}</legend>
-		<dl>
+			<dl>
 				<dt><label for="donation_cancel">{L_DONATION_CANCEL}{L_COLON}</label><br />
 				<span>{L_DONATION_CANCEL_EXPLAIN}</span></dt>
 				<dd><textarea id="donation_cancel" name="donation_cancel" rows="8" cols="45">{DONATION_CANCEL}</textarea></dd>

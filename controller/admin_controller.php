@@ -10,23 +10,18 @@
 
 namespace dmzx\donation\controller;
 
-/**
-* Admin controller
-*/
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
 class admin_controller
 {
-	/**
-	* The database tables
-	*
-	* @var string
-	*/
-	protected $donation_table;
-
 	/** @var \phpbb\config\config */
 	protected $config;
 
 	/** @var \phpbb\template\template */
 	protected $template;
+
+	/** @var \phpbb\log\log */
+	protected $log;
 
 	/** @var \phpbb\user */
 	protected $user;
@@ -38,23 +33,35 @@ class admin_controller
 	protected $request;
 
 	/**
+	* The database tables
+	*
+	* @var string
+	*/
+	protected $donation_table;
+
+	/** @var string Custom form action */
+	protected $u_action;
+
+	/**
 	 * Constructor
 	 *
 	 * @param \phpbb\config\config				$config
 	 * @param \phpbb\template\template			$template
+	 * @param \phpbb\log						$log
 	 * @param \phpbb\user						$user
 	 * @param \phpbb\db\driver\driver_interface	$db
 	 * @param \phpbb\request\request			$request
+	 * @param 									$donation_table
 	 */
 	public function __construct(\phpbb\config\config $config, \phpbb\template\template $template, \phpbb\log\log_interface $log, \phpbb\user $user, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, $donation_table)
 	{
-		$this->config = $config;
-		$this->template = $template;
-		$this->phpbb_log = $log;
-		$this->user = $user;
-		$this->db = $db;
-		$this->request = $request;
-		$this->donation_table = $donation_table;
+		$this->config 			= $config;
+		$this->template 		= $template;
+		$this->log 				= $log;
+		$this->user 			= $user;
+		$this->db 				= $db;
+		$this->request 			= $request;
+		$this->donation_table 	= $donation_table;
 	}
 
 	/**
@@ -79,7 +86,7 @@ class admin_controller
 				'donation_body' 			=> $this->request->variable('donation_body', '', true),
 				'donation_cancel' 			=> $this->request->variable('donation_cancel', '', true),
 				'donation_success' 			=> $this->request->variable('donation_success', '', true),
-			);
+			 );
 
 			foreach ($donation_row as $this->config_name => $this->config_value)
 			{
@@ -92,16 +99,16 @@ class admin_controller
 			// Set the options the user configured
 			$this->set_options();
 
-		// Add option settings change action to the admin log
-		$this->phpbb_log->add('admin', $this->user->data['user_id'], $this->user->ip, 'DONATION_SAVED');
+			// Add option settings change action to the admin log
+			$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'DONATION_SAVED');
 
-		trigger_error($this->user->lang['DONATION_SAVED'] . adm_back_link($this->u_action));
+			trigger_error($this->user->lang['DONATION_SAVED'] . adm_back_link($this->u_action));
 
 		}
 
 		// let's get it on
 		$sql = 'SELECT *
-		FROM ' . $this->donation_table;
+			FROM ' . $this->donation_table;
 		$result = $this->db->sql_query($sql);
 		$donation = array();
 		while ($row = $this->db->sql_fetchrow($result))
@@ -132,8 +139,8 @@ class admin_controller
 			'DONATION_CANCEL'					=> $donation_cancel,
 			'DONATION_SUCCESS'					=> $donation_success,
 
-			'U_ACTION'							=> $this->u_action)
-		);
+			'U_ACTION'							=> $this->u_action,
+		));
 	}
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* @package phpBB Extension - PhpBB Paypal Donation
+* @package phpBB Extension - phpBB Paypal Donation
 * @copyright (c) 2015 dmzx - http://www.dmzx-web.net
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 * @Author Stoker - http://www.phpbb3bbcodes.com
@@ -79,7 +79,6 @@ $lang = array_merge($lang, array(
 	'DONATION_CANCEL_EXPLAIN'				=> 'Enter the text you want displayed on the cancel page<br />This is the page users are redirected to after they cancel a donation.<br /><br />HTML is allowed.',
 	'DONATION_DISABLED'				=> 'Sorry, the Donation page is currently unavailable',
 	'DONATION_DISABLED_EMAIL'		=> 'Paypal email account not configured. Please notify the board founder.',
-	'DONATION_NOT_INSTALLED'		=> 'Donation extension database entries are missing.<br />Please run the %sinstaller%s to make the database changes for the modification.',
 	'DONATION_NOT_INSTALLED_USER'	=> 'The Donation page is not installed. Please notify the board founder.',
 	'DONATION_TITLE'				=> 'Make a Donation',
 	'DONATION_TITLE_HEAD'			=> 'Make a Donation to',

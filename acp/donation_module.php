@@ -21,9 +21,12 @@ class donation_module
 		// Get an instance of the admin controller
 		$admin_controller = $phpbb_container->get('dmzx.donation.admin.controller');
 
+		// Request
+		$action = $request->variable('action', '');
+
 		if ($request->is_set_post('submit'))
 		{
-			$u_action = 'submit';
+			$action = 'submit';
 		}
 		// Make the $u_action url available in the admin controller
 		$admin_controller->set_page_url($this->u_action);
