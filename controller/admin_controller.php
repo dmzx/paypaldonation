@@ -10,8 +10,6 @@
 
 namespace dmzx\donation\controller;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-
 class admin_controller
 {
 	/** @var \phpbb\config\config */
@@ -86,7 +84,7 @@ class admin_controller
 				'donation_body' 			=> $this->request->variable('donation_body', '', true),
 				'donation_cancel' 			=> $this->request->variable('donation_cancel', '', true),
 				'donation_success' 			=> $this->request->variable('donation_success', '', true),
-			 );
+			);
 
 			foreach ($donation_row as $this->config_name => $this->config_value)
 			{

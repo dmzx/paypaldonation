@@ -55,7 +55,7 @@ class donation
 		$this->template 		= $template;
 		$this->user 			= $user;
 		$this->db 				= $db;
-		$this->request 			= $request;;
+		$this->request 			= $request;
 		$this->donation_table 	= $donation_table;
 	}
 

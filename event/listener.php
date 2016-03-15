@@ -71,16 +71,16 @@ class listener implements EventSubscriberInterface
 	public function add_page_header_links($event)
 	{
 		$this->template->assign_vars(array(
-			'DONATION_ACHIEVEMENT_ENABLE'		=> (isset($this->config['donation_achievement_enable'])) ? $this->config['donation_achievement_enable']:false,
-			'DONATION_ACHIEVEMENT'				=> (isset($this->config['donation_achievement'])) ? $this->config[	'donation_achievement']:false,
-			'DONATION_INDEX_ENABLE'				=> (isset($this->config['donation_index_enable'])) ? $this->config['donation_index_enable']:false,
-			'DONATION_INDEX_TOP'				=> (isset($this->config['donation_index_top'])) ? $this->config['donation_index_top']:false,
-			'DONATION_INDEX_BOTTOM'				=> (isset($this->config['donation_index_bottom'])) ? $this->config['donation_index_bottom']:false,
-			'DONATION_GOAL_ENABLE'				=> (isset($this->config['donation_goal_enable'])) ? $this->config['donation_goal_enable']:false,
-			'DONATION_GOAL'						=> (isset($this->config['donation_goal'])) ? $this->config['donation_goal']:false,
-			'DONATION_GOAL_CURRENCY_ENABLE'		=> (isset($this->config['donation_goal_currency_enable'])) ? $this->config['donation_goal_currency_enable']:false,
-			'DONATION_GOAL_CURRENCY'			=> (isset($this->config['donation_goal_currency'])) ? $this->config['donation_goal_currency']:false,
-			'S_DONATE_ENABLED'					=> (isset($this->config['donation_enable'])) ? $this->config['donation_enable']:false,
+			'DONATION_ACHIEVEMENT_ENABLE'		=>	(isset($this->config['donation_achievement_enable'])) ? $this->config['donation_achievement_enable']:false,
+			'DONATION_ACHIEVEMENT'				=> 	(isset($this->config['donation_achievement'])) ? $this->config['donation_achievement']:false,
+			'DONATION_INDEX_ENABLE'				=> 	(isset($this->config['donation_index_enable'])) ? $this->config['donation_index_enable']:false,
+			'DONATION_INDEX_TOP'				=> 	(isset($this->config['donation_index_top'])) ? $this->config['donation_index_top']:false,
+			'DONATION_INDEX_BOTTOM'				=> 	(isset($this->config['donation_index_bottom'])) ? $this->config['donation_index_bottom']:false,
+			'DONATION_GOAL_ENABLE'				=> 	(isset($this->config['donation_goal_enable'])) ? $this->config['donation_goal_enable']:false,
+			'DONATION_GOAL'						=> 	(isset($this->config['donation_goal'])) ? $this->config['donation_goal']:false,
+			'DONATION_GOAL_CURRENCY_ENABLE'		=> 	(isset($this->config['donation_goal_currency_enable'])) ? $this->config['donation_goal_currency_enable']:false,
+			'DONATION_GOAL_CURRENCY'			=> 	(isset($this->config['donation_goal_currency'])) ? $this->config['donation_goal_currency']:false,
+			'S_DONATE_ENABLED'					=> 	(isset($this->config['donation_enable'])) ? $this->config['donation_enable']:false,
 		));
 
 		if (!empty($this->config['donation_goal_enable']) &&	$this->config['donation_goal'] > 0)
