@@ -1,7 +1,7 @@
 {
 	"name": "dmzx/donation",
 	"type": "phpbb-extension",
-	"description": "A simple Paypal Donation extension",
+	"description": "A simple Paypal Donation extension.",
 	"homepage": "http://www.dmzx-web.net",
 	"version": "1.0.1",
 	"time": "2016-03-15",
