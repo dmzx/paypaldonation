@@ -1,5 +1,7 @@
 # Paypal Donation Extension
 
+[![Build Status](https://travis-ci.org/dmzx/paypaldonation.svg?branch=master)](https://travis-ci.org/dmzx/paypaldonation)
+
 ## Install
 
 1. Download the latest release.
