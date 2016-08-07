@@ -28,6 +28,29 @@ span.donation  {
 	height: 16px; 
 	margin-bottom: -5px; 
 	padding-right: 10px;
+	background-repeat: no-repeat;
+	background-image: url("./images/loader.gif");
+}
+
+#donation {
+	margin-top:10px; 
+	font-size:1.3em;
+	text-align:center;
+}
+
+#donation-pay {
+	text-align:center; 
+	padding-top:6px;
+}
+
+#donation-amount {
+	height:17px;
+	font-size:12px;
+}
+
+#processingpaypal {
+	margin-top:8px; 
+	display:none;
 }
 
 #red {

@@ -1,16 +1,12 @@
 <?php
 /**
 *
-* @package phpBB Extension - phpBB Paypal Donation
-* @copyright (c) 2015 dmzx - http://www.dmzx-web.net
+* @package phpBB Extension - Paypal Donation
+* @copyright (c) 2016 dmzx - http://www.dmzx-web.net
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
-* @Author Stoker - http://www.phpbb3bbcodes.com
 *
 */
 
-/**
-* DO NOT CHANGE
-*/
 if (!defined('IN_PHPBB'))
 {
 	exit;
@@ -33,17 +29,14 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 //
-// Some characters you may want to copy&paste:
+// Some characters for use
 // ’ » “ ” …
-//
 
 $lang = array_merge($lang, array(
 	'DONATEINDEX'							=> 'Donate',
 	'VIEWING_DONATE'						=> 'Viewing Donation page',
-	'ACP_DONATION_MOD'						=> 'Donation Extension',
-	'DONATION_SAVED'						=> 'Donation settings saved',
+	'DONATION_SAVED'						=> '<strong>Donation settings saved</strong>',
 	'DONATION_VERSION'						=> 'Version',
-	'DONATION_CONFIG'						=> 'Configuration',
 	'DONATION_SETTINGS'						=> 'Global Donation Config',
 	'DONATION_ENABLE'						=> 'Enable Donation extension',
 	'DONATION_ENABLE_EXPLAIN'				=> 'Enable or disable the Donation extension.',
@@ -77,27 +70,24 @@ $lang = array_merge($lang, array(
 	'DONATION_CANCEL_SETTINGS'				=> 'Donation Cancel Config',
 	'DONATION_CANCEL'						=> 'Donation cancel text',
 	'DONATION_CANCEL_EXPLAIN'				=> 'Enter the text you want displayed on the cancel page<br />This is the page users are redirected to after they cancel a donation.<br /><br />HTML is allowed.',
-	'DONATION_DISABLED'				=> 'Sorry, the Donation page is currently unavailable',
-	'DONATION_DISABLED_EMAIL'		=> 'Paypal email account not configured. Please notify the board founder.',
-	'DONATION_NOT_INSTALLED_USER'	=> 'The Donation page is not installed. Please notify the board founder.',
-	'DONATION_TITLE'				=> 'Make a Donation',
-	'DONATION_TITLE_HEAD'			=> 'Make a Donation to',
-	'WE_HAVE_ACHIEVED'				=> 'We have received',
-	'WE_HAVE_ACHIEVED_IN'			=> 'in donations.',
-	'OUR_DONATION_GOAL'				=> 'Our goal is to raise',
-	'DONATION_CANCELLED_TITLE'		=> 'Donation Cancelled',
-	'DONATION_SUCCESSFULL_TITLE'	=> 'Donation Successful',
-	'DONATION_CONTACT_PAYPAL'		=> 'Connecting to Paypal - Please Wait…',
-	'DONATION_BODY_DEFAULT'			=> 'Please make a donation to support this site and help us with the hosting costs.',
-	'DONATION_SUCCESS_DEFAULT'		=> 'Thank you for your donation. Its greatly appreciated.',
-	'DONATION_CANCEL_DEFAULT'		=> 'You have cancelled your donation. Its no problem, but please consider a donation in the future.',
-	'DONATION_ADMIN_DEFAULT'		=> 'This text can be changed in ACP under the extensions tab.',
-	'DONATIONS_INDEX'				=> 'Donations',
-	'DONATION_USD'					=> '$ USD',
-	'DONATION_EUR'					=> '€ EUR',
-	'DONATION_GBP'					=> '£ GBP',
-	'DONATION_JPY'					=> '¥ JPY',
-	'DONATION_AUD'					=> '$ AUD',
-	'DONATION_CAD'					=> '$ CAD',
-	'DONATION_HKD'					=> '$ HKD',
+	'DONATION_DISABLED'						=> 'Sorry, the Donation page is currently unavailable',
+	'DONATION_DISABLED_EMAIL'				=> 'Paypal email account not configured. Please notify the board Admin.',
+	'DONATION_NOT_INSTALLED_USER'			=> 'The Donation page is not installed. Please notify the board Admin.',
+	'DONATION_TITLE'						=> 'Make a Donation',
+	'DONATION_CANCELLED_TITLE'				=> 'Donation Cancelled',
+	'DONATION_SUCCESSFULL_TITLE'			=> 'Donation Successful',
+	'DONATION_CONTACT_PAYPAL'				=> 'Connecting to Paypal - Please Wait…',
+	'DONATION_BODY_DEFAULT'					=> 'Please make a donation to support this site and help us with the hosting costs.',
+	'DONATION_SUCCESS_DEFAULT'				=> 'Thank you for your donation. Its greatly appreciated.',
+	'DONATION_CANCEL_DEFAULT'				=> 'You have cancelled your donation. Its no problem, but please consider a donation in the future.',
+	'DONATIONS_INDEX'						=> 'Donations',
+	'DONATION_USD'							=> '$ USD',
+	'DONATION_EUR'							=> '€ EUR',
+	'DONATION_GBP'							=> '£ GBP',
+	'DONATION_JPY'							=> '¥ JPY',
+	'DONATION_AUD'							=> '$ AUD',
+	'DONATION_CAD'							=> '$ CAD',
+	'DONATION_HKD'							=> '$ HKD',
+	'DONATION_ACHIEVED'						=> 'We have received %1$s <strong>%2$s</strong> in donations.',
+	'DONATION_GOAL_ACHIEVED'				=> 'Our goal is to raise %1$s <strong>%2$s</strong>.',
 ));

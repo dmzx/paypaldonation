@@ -1,10 +1,9 @@
 <?php
 /**
 *
-* @package phpBB Extension - phpBB Paypal Donation
-* @copyright (c) 2015 dmzx - http://www.dmzx-web.net
+* @package phpBB Extension - Paypal Donation
+* @copyright (c) 2016 dmzx - http://www.dmzx-web.net
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
-* @Author Stoker - http://www.phpbb3bbcodes.com
 *
 */
 
@@ -18,7 +17,7 @@ class admin_controller
 	/** @var \phpbb\template\template */
 	protected $template;
 
-	/** @var \phpbb\log\log */
+	/** @var \phpbb\log\log_interface */
 	protected $log;
 
 	/** @var \phpbb\user */
@@ -30,12 +29,8 @@ class admin_controller
 	/** @var \phpbb\request\request */
 	protected $request;
 
-	/**
-	* The database tables
-	*
-	* @var string
-	*/
-	protected $donation_table;
+	/** @var \phpbb\config\db_text */
+	protected $config_text;
 
 	/** @var string Custom form action */
 	protected $u_action;
@@ -45,13 +40,13 @@ class admin_controller
 	 *
 	 * @param \phpbb\config\config				$config
 	 * @param \phpbb\template\template			$template
-	 * @param \phpbb\log						$log
+	 * @param \\phpbb\log\log_interface			$log
 	 * @param \phpbb\user						$user
 	 * @param \phpbb\db\driver\driver_interface	$db
 	 * @param \phpbb\request\request			$request
-	 * @param 									$donation_table
+	 * @param \phpbb\config\db_text				$config_text
 	 */
-	public function __construct(\phpbb\config\config $config, \phpbb\template\template $template, \phpbb\log\log_interface $log, \phpbb\user $user, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, $donation_table)
+	public function __construct(\phpbb\config\config $config, \phpbb\template\template $template, \phpbb\log\log_interface $log, \phpbb\user $user, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\config\db_text $config_text)
 	{
 		$this->config 			= $config;
 		$this->template 		= $template;
@@ -59,7 +54,7 @@ class admin_controller
 		$this->user 			= $user;
 		$this->db 				= $db;
 		$this->request 			= $request;
-		$this->donation_table 	= $donation_table;
+		$this->config_text 		= $config_text;
 	}
 
 	/**
@@ -72,6 +67,12 @@ class admin_controller
 	{
 		add_form_key('acp_donation');
 
+		$data = $this->config_text->get_array(array(
+			'donation_body',
+			'donation_cancel',
+			'donation_success',
+		));
+
 		// Is the form being submitted to us?
 		if ($this->request->is_set_post('submit'))
 		{
@@ -80,19 +81,16 @@ class admin_controller
 				$error[] = 'FORM_INVALID';
 			}
 
-			$donation_row = array(
-				'donation_body' 			=> $this->request->variable('donation_body', '', true),
-				'donation_cancel' 			=> $this->request->variable('donation_cancel', '', true),
-				'donation_success' 			=> $this->request->variable('donation_success', '', true),
-			);
+			$data['donation_body'] 		= $this->request->variable('donation_body', '', true);
+			$data['donation_cancel'] 	= $this->request->variable('donation_cancel', '', true);
+			$data['donation_success'] 	= $this->request->variable('donation_success', '', true);
 
-			foreach ($donation_row as $this->config_name => $this->config_value)
-			{
-				$sql = 'UPDATE ' . $this->donation_table . "
-					SET config_value = '" . $this->db->sql_escape($this->config_value) . "'
-					WHERE config_name = '" . $this->db->sql_escape($this->config_name) . "'";
-				$this->db->sql_query($sql);
-			}
+			// Store the settings to the config_table in the database
+			$this->config_text->set_array(array(
+				'donation_body'			=> $data['donation_body'],
+				'donation_cancel'		=> $data['donation_cancel'],
+				'donation_success'		=> $data['donation_success'],
+			));
 
 			// Set the options the user configured
 			$this->set_options();
@@ -104,20 +102,6 @@ class admin_controller
 
 		}
 
-		// let's get it on
-		$sql = 'SELECT *
-			FROM ' . $this->donation_table;
-		$result = $this->db->sql_query($sql);
-		$donation = array();
-		while ($row = $this->db->sql_fetchrow($result))
-		{
-			$donation[$row['config_name']] = $row['config_value'];
-		}
-		$this->db->sql_freeresult($result);
-
-		$donation_body = isset($donation['donation_body']) ? $donation['donation_body'] : '';
-		$donation_cancel = isset($donation['donation_cancel']) ? $donation['donation_cancel'] : '';
-		$donation_success = isset($donation['donation_success']) ? $donation['donation_success'] : '';
 		$donation_version = isset($this->config['donation_version']) ? $this->config['donation_version'] : '';
 
 		$this->template->assign_vars(array(
@@ -133,9 +117,9 @@ class admin_controller
 			'DONATION_GOAL'						=> $this->config['donation_goal'],
 			'DONATION_GOAL_CURRENCY_ENABLE'		=> $this->config['donation_goal_currency_enable'],
 			'DONATION_GOAL_CURRENCY'			=> $this->config['donation_goal_currency'],
-			'DONATION_BODY'						=> $donation_body,
-			'DONATION_CANCEL'					=> $donation_cancel,
-			'DONATION_SUCCESS'					=> $donation_success,
+			'DONATION_BODY'						=> $data['donation_body'],
+			'DONATION_CANCEL'					=> $data['donation_cancel'],
+			'DONATION_SUCCESS'					=> $data['donation_success'],
 
 			'U_ACTION'							=> $this->u_action,
 		));

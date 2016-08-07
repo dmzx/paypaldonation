@@ -1,11 +1,15 @@
 {
 	"name": "dmzx/donation",
 	"type": "phpbb-extension",
-	"description": "A simple Paypal Donation extension.",
+	"description": "A simple Paypal Donation extension",
 	"homepage": "http://www.dmzx-web.net",
-	"version": "1.0.1",
-	"time": "2016-03-15",
-	"keywords": ["phpbb", "extension", "donation"],
+	"version": "1.0.2",
+	"time": "2016-05-25",
+	"keywords": [
+		"phpbb",
+		"extension",
+		"donation"
+	],
 	"license": "GPL-2.0",
 	"authors": [
 		{
@@ -21,7 +25,8 @@
 		}
 	],
 	"require": {
-		"php": ">=5.3.3"
+		"php": ">=5.3.3",
+		"phpbb/phpbb": "3.1.*"
 	},
 	"require-dev": {
 		"phpbb/epv": "dev-master"
@@ -30,6 +35,11 @@
 		"display-name": "Paypal Donation",
 		"soft-require": {
 			"phpbb/phpbb": "3.1.*"
+		},
+		"version-check": {
+			"host": "www.phpbb.com",
+			"directory": "/customise/db/extension/paypal_donation",
+			"filename": "version_check"
 		}
 	}
 }

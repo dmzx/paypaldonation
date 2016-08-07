@@ -1,10 +1,9 @@
 <?php
 /**
 *
-* @package phpBB Extension - phpBB Paypal Donation
-* @copyright (c) 2015 dmzx - http://www.dmzx-web.net
+* @package phpBB Extension - Paypal Donation
+* @copyright (c) 2016 dmzx - http://www.dmzx-web.net
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
-* @Author Stoker - http://www.phpbb3bbcodes.com
 *
 */
 
@@ -30,12 +29,8 @@ class donation
 	/** @var \phpbb\request\request */
 	protected $request;
 
-	/**
-	* The database tables
-	*
-	* @var string
-	*/
-	protected $donation_table;
+	/** @var \phpbb\config\db_text */
+	protected $config_text;
 
 	/**
 	* Constructor
@@ -46,9 +41,9 @@ class donation
 	* @param \phpbb\user						$user
 	* @param \phpbb\db\driver\driver_interface	$db
 	* @param \phpbb\request\request				$request
-	* @param 									$donation_table
+	* @param \phpbb\config\db_text				$config_text
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, $donation_table)
+	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\config\db_text $config_text)
 	{
 		$this->config 			= $config;
 		$this->helper 			= $helper;
@@ -56,7 +51,7 @@ class donation
 		$this->user 			= $user;
 		$this->db 				= $db;
 		$this->request 			= $request;
-		$this->donation_table 	= $donation_table;
+		$this->config_text 		= $config_text;
 	}
 
 	public function handle()
@@ -72,29 +67,21 @@ class donation
 			trigger_error($this->user->lang['DONATION_DISABLED_EMAIL'], E_USER_NOTICE);
 		}
 
-		$sql = 'SELECT *
-			FROM ' . $this->donation_table;
-		$result = $this->db->sql_query($sql);
-		$donation = array();
-		while ($row = $this->db->sql_fetchrow($result))
-		{
-			$donation[$row['config_name']] = $row['config_value'];
-		}
-		$this->db->sql_freeresult($result);
+		$data = $this->config_text->get_array(array(
+			'donation_body',
+			'donation_cancel',
+			'donation_success',
+		));
 
-		$donation_body = isset($donation['donation_body']) ? $donation['donation_body'] : '';
-		$donation_cancel = isset($donation['donation_cancel']) ? $donation['donation_cancel'] : '';
-		$donation_success = isset($donation['donation_success']) ? $donation['donation_success'] : '';
-		$success_url = $this->generate_return_url('success');
-		$cancel_url = $this->generate_return_url('cancel');
-
-		$mode = $this->request->variable('mode', '');
+		$success_url	= $this->generate_return_url('success');
+		$cancel_url		= $this->generate_return_url('cancel');
+		$mode 			= $this->request->variable('mode', '');
 
 		if (!empty($this->config['donation_goal_enable']) && $this->config['donation_goal'] > 0)
 		{
 			$donation_goal_number = ($this->config['donation_achievement'] * 100) / $this->config['donation_goal'];
 			$this->template->assign_vars(array(
-				'DONATION_GOAL_NUMBER'				=> round($donation_goal_number),
+				'DONATION_GOAL_NUMBER'	=> round($donation_goal_number),
 			));
 		}
 
@@ -109,15 +96,15 @@ class donation
 			'DONATION_GOAL'						=> $this->config['donation_goal'],
 			'DONATION_GOAL_CURRENCY_ENABLE'		=> $this->config['donation_goal_currency_enable'],
 			'DONATION_GOAL_CURRENCY'			=> $this->config['donation_goal_currency'],
-			'DONATION_BODY'						=> html_entity_decode($donation_body),
-			'DONATION_CANCEL'					=> html_entity_decode($donation_cancel),
-			'DONATION_SUCCESS'					=> html_entity_decode($donation_success),
+			'DONATION_BODY'						=> html_entity_decode($data['donation_body']),
+			'DONATION_CANCEL'					=> html_entity_decode($data['donation_cancel']),
+			'DONATION_SUCCESS'					=> html_entity_decode($data['donation_success']),
 		));
 
 		// Set up Navlinks
 		$this->template->assign_block_vars('navlinks', array(
-			'FORUM_NAME' => $this->user->lang('DONATION_TITLE'),
-			'U_VIEW_FORUM' => $this->helper->route('dmzx_donation_controller'),
+			'FORUM_NAME' 	=> $this->user->lang('DONATION_TITLE'),
+			'U_VIEW_FORUM' 	=> $this->helper->route('dmzx_donation_controller'),
 		));
 
 		switch ($mode)

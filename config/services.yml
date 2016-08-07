@@ -1,5 +1,3 @@
-imports:
-    - { resource: tables.yml }
 services:
     dmzx.donation.controller:
         class: dmzx\donation\controller\donation
@@ -10,7 +8,7 @@ services:
             - '@user'
             - '@dbal.conn'
             - '@request'
-            - '%dmzx.donation.table.donation%'
+            - '@config_text'
     dmzx.donation.admin.controller:
         class: dmzx\donation\controller\admin_controller
         arguments:
@@ -20,7 +18,7 @@ services:
             - '@user'
             - '@dbal.conn'
             - '@request'
-            - '%dmzx.donation.table.donation%'
+            - '@config_text'
     dmzx.donation.listener:
         class: dmzx\donation\event\listener
         arguments:
