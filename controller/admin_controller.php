@@ -46,7 +46,15 @@ class admin_controller
 	 * @param \phpbb\request\request			$request
 	 * @param \phpbb\config\db_text				$config_text
 	 */
-	public function __construct(\phpbb\config\config $config, \phpbb\template\template $template, \phpbb\log\log_interface $log, \phpbb\user $user, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\config\db_text $config_text)
+	public function __construct(
+		\phpbb\config\config $config,
+		\phpbb\template\template $template,
+		\phpbb\log\log_interface $log,
+		\phpbb\user $user,
+		\phpbb\db\driver\driver_interface $db,
+		\phpbb\request\request $request,
+		\phpbb\config\db_text $config_text
+	)
 	{
 		$this->config 			= $config;
 		$this->template 		= $template;
@@ -96,10 +104,9 @@ class admin_controller
 			$this->set_options();
 
 			// Add option settings change action to the admin log
-			$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'DONATION_SAVED');
+			$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'LOG_DONATION_SAVED');
 
 			trigger_error($this->user->lang['DONATION_SAVED'] . adm_back_link($this->u_action));
-
 		}
 
 		$donation_version = isset($this->config['donation_version']) ? $this->config['donation_version'] : '';
@@ -115,7 +122,6 @@ class admin_controller
 			'DONATION_ACHIEVEMENT'				=> $this->config['donation_achievement'],
 			'DONATION_GOAL_ENABLE'				=> $this->config['donation_goal_enable'],
 			'DONATION_GOAL'						=> $this->config['donation_goal'],
-			'DONATION_GOAL_CURRENCY_ENABLE'		=> $this->config['donation_goal_currency_enable'],
 			'DONATION_GOAL_CURRENCY'			=> $this->config['donation_goal_currency'],
 			'DONATION_BODY'						=> $data['donation_body'],
 			'DONATION_CANCEL'					=> $data['donation_cancel'],
@@ -142,7 +148,6 @@ class admin_controller
 		$this->config->set('donation_goal', $this->request->variable('donation_goal', ''));
 		$this->config->set('donation_achievement_enable', $this->request->variable('donation_achievement_enable', 0));
 		$this->config->set('donation_achievement', $this->request->variable('donation_achievement', ''));
-		$this->config->set('donation_goal_currency_enable', $this->request->variable('donation_goal_currency_enable', 0));
 		$this->config->set('donation_goal_currency', $this->request->variable('donation_goal_currency', '', true));
 	}
 

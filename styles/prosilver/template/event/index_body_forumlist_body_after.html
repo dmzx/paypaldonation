@@ -1,7 +1,7 @@
 <!-- IF (DONATION_INDEX_ENABLE and S_USER_LOGGED_IN and S_DONATE_ENABLED and DONATION_INDEX_BOTTOM) and (DONATION_ACHIEVEMENT_ENABLE or DONATION_GOAL_ENABLE) -->
-	<h3><a href="{U_DONATE}">{L_DONATIONS_INDEX}</a></h3>
-	<!-- IF DONATION_GOAL_ENABLE and DONATION_ACHIEVEMENT_ENABLE and DONATION_GOAL > 0 -->
-		<div class="grey"><div id="<!-- IF DONATION_GOAL_NUMBER < 34 -->red" style="<!-- ELSEIF DONATION_GOAL_NUMBER < 67 -->yellow" style="<!-- ELSE -->green" style="<!-- ENDIF --> width:{DONATION_GOAL_NUMBER}%;"><span class="donation">{DONATION_GOAL_NUMBER}<!-- IF DONATION_GOAL_NUMBER >= 3 -->%<!-- ENDIF --></span></div></div>
-	<!-- ENDIF -->
-	<p id="donation"><!-- IF DONATION_ACHIEVEMENT_ENABLE -->{L_DONATION_ACHIEVED}<!-- ENDIF --> <!-- IF DONATION_GOAL_ENABLE and DONATION_GOAL > 0 --> {L_DONATION_GOAL}<!-- ENDIF --></p>
+<h3><a href="{U_DONATE}">{L_DONATIONS_INDEX}</a></h3>
+<!-- IF DONATION_GOAL_ENABLE and DONATION_ACHIEVEMENT_ENABLE and DONATION_GOAL > 0 -->
+	<div class="grey"><div id="<!-- IF DONATION_GOAL_NUMBER < 34 -->red" style="<!-- ELSEIF DONATION_GOAL_NUMBER < 67 -->yellow" style="<!-- ELSE -->green" style="<!-- ENDIF --> width:{DONATION_GOAL_NUMBER}%;"><span class="donation">{DONATION_GOAL_NUMBER}<!-- IF DONATION_GOAL_NUMBER >= 3 -->%<!-- ENDIF --></span></div></div>
+<!-- ENDIF -->
+<p id="donation"><!-- IF DONATION_ACHIEVEMENT_ENABLE -->{L_DONATION_ACHIEVED}<!-- ENDIF --> <!-- IF DONATION_GOAL_ENABLE and DONATION_GOAL > 0 --> {L_DONATION_GOAL}<!-- ENDIF --></p>
 <!-- ENDIF -->

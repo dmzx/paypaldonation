@@ -17,13 +17,16 @@ class acp_donation_module
 	{
 		global $phpbb_container, $user;
 
+		// Add the ACP lang file
+		$user->add_lang_ext('dmzx/donation', 'acp_donation');
+
 		// Get an instance of the admin controller
 		$admin_controller = $phpbb_container->get('dmzx.donation.admin.controller');
 
 		// Make the $u_action url available in the admin controller
 		$admin_controller->set_page_url($this->u_action);
 
-		switch ($mode)
+		switch($mode)
 		{
 			case 'configuration':
 				// Load a template from adm/style for our ACP page

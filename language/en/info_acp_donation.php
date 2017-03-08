@@ -35,4 +35,6 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 	'ACP_DONATION_EXT'				=> 'Donation Extension',
 	'ACP_DONATION_CONFIG'			=> 'Configuration',
+	//Log
+	'LOG_DONATION_SAVED'			=> '<strong>Donation settings saved</strong>',
 ));

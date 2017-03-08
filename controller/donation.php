@@ -9,6 +9,8 @@
 
 namespace dmzx\donation\controller;
 
+use phpbb\exception\http_exception;
+
 class donation
 {
 	/** @var \phpbb\config\config */
@@ -43,7 +45,14 @@ class donation
 	* @param \phpbb\request\request				$request
 	* @param \phpbb\config\db_text				$config_text
 	*/
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\config\db_text $config_text)
+	public function __construct(
+		\phpbb\config\config $config,
+		\phpbb\controller\helper $helper,
+		\phpbb\template\template $template,
+		\phpbb\user $user, \phpbb\db\driver\driver_interface $db,
+		\phpbb\request\request $request,
+		\phpbb\config\db_text $config_text
+	)
 	{
 		$this->config 			= $config;
 		$this->helper 			= $helper;
@@ -59,12 +68,12 @@ class donation
 		// Do we have the donation extension enabled
 		if (isset($this->config['donation_enable']) && $this->config['donation_enable'] == 0)
 		{
-			trigger_error($this->user->lang['DONATION_DISABLED'], E_USER_NOTICE);
+			throw new http_exception(403, 'DONATION_DISABLED');
 		}
 
 		if (isset($this->config['donation_email']) && $this->config['donation_email'] == '')
 		{
-			trigger_error($this->user->lang['DONATION_DISABLED_EMAIL'], E_USER_NOTICE);
+			throw new http_exception(403, 'DONATION_DISABLED_EMAIL');
 		}
 
 		$data = $this->config_text->get_array(array(
@@ -94,11 +103,11 @@ class donation
 			'DONATION_ACHIEVEMENT'				=> $this->config['donation_achievement'],
 			'DONATION_GOAL_ENABLE'				=> $this->config['donation_goal_enable'],
 			'DONATION_GOAL'						=> $this->config['donation_goal'],
-			'DONATION_GOAL_CURRENCY_ENABLE'		=> $this->config['donation_goal_currency_enable'],
-			'DONATION_GOAL_CURRENCY'			=> $this->config['donation_goal_currency'],
 			'DONATION_BODY'						=> html_entity_decode($data['donation_body']),
 			'DONATION_CANCEL'					=> html_entity_decode($data['donation_cancel']),
 			'DONATION_SUCCESS'					=> html_entity_decode($data['donation_success']),
+			'L_DONATION_ACHIEVED'				=> $this->user->lang('DONATION_ACHIEVED', $this->config['donation_goal_currency'], $this->config['donation_achievement']),
+			'L_DONATION_GOAL'					=> $this->user->lang('DONATION_GOAL_ACHIEVED', $this->config['donation_goal_currency'], $this->config['donation_goal']),
 		));
 
 		// Set up Navlinks
