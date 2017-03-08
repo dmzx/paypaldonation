@@ -26,7 +26,7 @@ class acp_donation_module
 		// Make the $u_action url available in the admin controller
 		$admin_controller->set_page_url($this->u_action);
 
-		switch($mode)
+		switch ($mode)
 		{
 			case 'configuration':
 				// Load a template from adm/style for our ACP page
