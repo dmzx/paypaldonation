@@ -86,7 +86,7 @@ class admin_controller
 		{
 			if (!check_form_key('acp_donation'))
 			{
-				$error[] = 'FORM_INVALID';
+				trigger_error($this->user->lang['FORM_INVALID'] . adm_back_link($this->u_action), E_USER_WARNING);
 			}
 
 			$data['donation_body'] 		= $this->request->variable('donation_body', '', true);
