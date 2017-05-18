@@ -1,6 +1,6 @@
 <!-- INCLUDE overall_header.html -->
 
-<h1>{L_ACP_DONATION_MOD}</h1>
+<h1>{L_ACP_DONATION_EXT}</h1>
 <p>{L_DONATION_VERSION} {DONATION_VERSION}</p>
 
 <form id="acp_donation" method="post" action="{U_ACTION}">
@@ -18,7 +18,6 @@
 			<dd><input type="text" name="donation_email" size="40" value="{DONATION_EMAIL}" /></dd>
 		</dl>
 	</fieldset>
-
 	<fieldset>
 		<legend>{L_DONATION_STATS_SETTINGS}</legend>
 		<dl>
@@ -62,48 +61,40 @@
 			<dd><input type="text" name="donation_goal" size="10" value="{DONATION_GOAL}" /></dd>
 		</dl>
 		<dl>
-			<dt><label for="donation_goal_currency_enable">{L_DONATION_GOAL_CURRENCY_ENABLE}{L_COLON}</label></dt>
-			<dd><label><input type="radio" class="radio" name="donation_goal_currency_enable" value="1"<!-- IF DONATION_GOAL_CURRENCY_ENABLE --> id="donation_goal_currency_enable" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-			<label><input type="radio" class="radio" name="donation_goal_currency_enable" value="0"<!-- IF not DONATION_GOAL_CURRENCY_ENABLE --> id="donation_goal_currency_enable" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
-		</dl>
-		<dl>
 			<dt><label for="donation_goal_currency">{L_DONATION_GOAL_CURRENCY}{L_COLON}</label><br />
 			<span>{L_DONATION_GOAL_CURRENCY_EXPLAIN}</span></dt>
 			<dd><input type="text" name="donation_goal_currency" size="10" value="{DONATION_GOAL_CURRENCY}" /></dd>
 		</dl>
 	</fieldset>
-
 	<fieldset>
 		<legend>{L_DONATION_BODY_SETTINGS}</legend>
-		<dl>
+			<dl>
 				<dt><label for="donation_body">{L_DONATION_BODY}{L_COLON}</label><br />
 				<span>{L_DONATION_BODY_EXPLAIN}</span></dt>
 				<dd><textarea id="donation_body" name="donation_body" rows="8" cols="45">{DONATION_BODY}</textarea></dd>
 			</dl>
 	</fieldset>
-
 	<fieldset>
 		<legend>{L_DONATION_SUCCESS_SETTINGS}</legend>
-		<dl>
+			<dl>
 				<dt><label for="donation_success">{L_DONATION_SUCCESS}{L_COLON}</label><br />
 				<span>{L_DONATION_SUCCESS_EXPLAIN}</span></dt>
 				<dd><textarea id="donation_success" name="donation_success" rows="8" cols="45">{DONATION_SUCCESS}</textarea></dd>
 			</dl>
 	</fieldset>
-
 	<fieldset>
 		<legend>{L_DONATION_CANCEL_SETTINGS}</legend>
-		<dl>
+			<dl>
 				<dt><label for="donation_cancel">{L_DONATION_CANCEL}{L_COLON}</label><br />
 				<span>{L_DONATION_CANCEL_EXPLAIN}</span></dt>
 				<dd><textarea id="donation_cancel" name="donation_cancel" rows="8" cols="45">{DONATION_CANCEL}</textarea></dd>
 			</dl>
 	</fieldset>
-
 	<p class="submit-buttons">
-			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
-			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
 	</p>
 	{S_FORM_TOKEN}
 </form>
+
 <!-- INCLUDE overall_footer.html -->

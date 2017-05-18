@@ -1,51 +1,32 @@
-imports:
-    - { resource: tables.yml }
 services:
     dmzx.donation.controller:
         class: dmzx\donation\controller\donation
         arguments:
-            - @config
-            - @controller.helper
-            - @template
-            - @log
-            - @user
-            - @auth
-            - @dbal.conn
-            - @cache
-            - @request
-            - @pagination
-            - %core.root_path%
-            - %core.php_ext%
-            - %core.table_prefix%
-            - %dmzx.donation.table.donation%
+            - '@config'
+            - '@controller.helper'
+            - '@template'
+            - '@user'
+            - '@dbal.conn'
+            - '@request'
+            - '@config_text'
     dmzx.donation.admin.controller:
         class: dmzx\donation\controller\admin_controller
         arguments:
-            - @config
-            - @controller.helper
-            - @template
-            - @log
-            - @user
-            - @auth
-            - @dbal.conn
-            - @cache
-            - @request
-            - @pagination
-            - %core.root_path%
-            - %core.php_ext%
-            - %core.table_prefix%
-            - %dmzx.donation.table.donation%
+            - '@config'
+            - '@template'
+            - '@log'
+            - '@user'
+            - '@dbal.conn'
+            - '@request'
+            - '@config_text'
     dmzx.donation.listener:
         class: dmzx\donation\event\listener
         arguments:
-            - @auth
-            - @config
-            - @controller.helper
-            - @template
-            - @user
-            - @dbal.conn
-            - %core.root_path%
-            - %core.php_ext%
-            - %core.table_prefix%
+            - '@config'
+            - '@controller.helper'
+            - '@template'
+            - '@user'
+            - '%core.php_ext%'
+            - '@?files.factory'
         tags:
             - { name: event.listener }
