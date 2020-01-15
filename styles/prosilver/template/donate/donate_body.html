@@ -1,16 +1,16 @@
-<!-- INCLUDE overall_header.html -->
+{% INCLUDE 'overall_header.html' %}
 
-<h2>{L_DONATION_TITLE}</h2>
+<h2>{{ lang('DONATION_TITLE') }}</h2>
 
 <div class="panel">
 	<div class="inner">
-		<!-- IF DONATION_GOAL_ENABLE and DONATION_ACHIEVEMENT_ENABLE and DONATION_GOAL > 0 -->
-		<div class="grey"><div id="<!-- IF DONATION_GOAL_NUMBER < 34 -->red" style="<!-- ELSEIF DONATION_GOAL_NUMBER < 67 -->yellow" style="<!-- ELSE -->green" style="<!-- ENDIF -->width:{DONATION_GOAL_NUMBER}%;"><span class="donation">{DONATION_GOAL_NUMBER}<!-- IF DONATION_GOAL_NUMBER >= 3 -->%<!-- ENDIF --></span></div></div>
-		<!-- ENDIF -->
-		<!-- IF DONATION_ACHIEVEMENT_ENABLE or DONATION_GOAL_ENABLE -->
-		<p id="donation"><!-- IF DONATION_ACHIEVEMENT_ENABLE -->{L_DONATION_ACHIEVED}<!-- ENDIF --><!-- IF DONATION_GOAL_ENABLE and DONATION_GOAL > 0 --> {L_DONATION_GOAL}<!-- ENDIF --></p><hr />
-		<!-- ENDIF -->
-		<!-- IF DONATION_BODY -->{DONATION_BODY}<!-- ELSE --><p>{L_DONATION_BODY_DEFAULT}</p><!-- ENDIF -->
+		{% if DONATION_GOAL_ENABLE and DONATION_ACHIEVEMENT_ENABLE and DONATION_GOAL > 0 %}
+		<div class="grey"><div id="{% if DONATION_GOAL_NUMBER < 34 %}red" style="{% elseif DONATION_GOAL_NUMBER < 67 %}yellow" style="{% else %}green" style="{% endif %}width:{{ DONATION_GOAL_NUMBER }}%;"><span class="donation">{{ DONATION_GOAL_NUMBER }}{% if DONATION_GOAL_NUMBER >= 3 %}%{% endif %}</span></div></div>
+		{% endif %}
+		{% if DONATION_ACHIEVEMENT_ENABLE or DONATION_GOAL_ENABLE %}
+		<p id="donation">{% if DONATION_ACHIEVEMENT_ENABLE %}{{ lang('DONATION_ACHIEVED') }}{% endif %}{% if DONATION_GOAL_ENABLE and DONATION_GOAL > 0 %} {{ lang('DONATION_GOAL') }}{% endif %}</p><hr />
+		{% endif %}
+		{% if DONATION_BODY %}{{ DONATION_BODY }}{% else %}<p>{{ lang('DONATION_BODY_DEFAULT') }}</p>{% endif %}
 	</div>
 </div>
 
@@ -20,35 +20,35 @@
 			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 				<div>
 					<input type="hidden" name="cmd" value="_xclick" />
-					<input type="hidden" name="business" value="{DONATION_EMAIL}" />
-					<input type="hidden" name="item_name" value="{L_DONATION_TITLE} {SITENAME}" />
+					<input type="hidden" name="business" value="{{ DONATION_EMAIL }}" />
+					<input type="hidden" name="item_name" value="{{ lang('DONATION_TITLE') }} {{ SITENAME }}" />
 					<input type="hidden" name="no_shipping" value="1" />
-					<input type="hidden" name="return" value="{U_DONATE_SUCCESS}" />
-					<input type="hidden" name="cancel_return" value="{U_DONATE_CANCEL}" />
-					<input type="hidden" name="item_number" value="{S_USERNAME}" />
+					<input type="hidden" name="return" value="{{ U_DONATE_SUCCESS }}" />
+					<input type="hidden" name="cancel_return" value="{{ U_DONATE_CANCEL }}" />
+					<input type="hidden" name="item_number" value="{{ S_USERNAME }}" />
 					<input type="hidden" name="tax" value="0" />
 					<input type="hidden" name="bn" value="PP-DonationsBF" />
 					<input type="text" name="amount" id="donation-amount" class="inputbox autowidth" />
 					<select name="currency_code" id="currency_code">
-						<option value="USD" selected="selected">{L_DONATION_USD}</option>
-						<option value="EUR">{L_DONATION_EUR}</option>
-						<option value="GBP">{L_DONATION_GBP}</option>
-						<option value="JPY">{L_DONATION_JPY}</option>
-						<option value="AUD">{L_DONATION_AUD}</option>
-						<option value="CAD">{L_DONATION_CAD}</option>
-						<option value="HKD">{L_DONATION_HKD}</option>
+						<option value="USD" selected="selected">{{ lang('DONATION_USD') }}</option>
+						<option value="EUR">{{ lang('DONATION_EUR') }}</option>
+						<option value="GBP">{{ lang('DONATION_GBP') }}</option>
+						<option value="JPY">{{ lang('DONATION_JPY') }}</option>
+						<option value="AUD">{{ lang('DONATION_AUD') }}</option>
+						<option value="CAD">{{ lang('DONATION_CAD') }}</option>
+						<option value="HKD">{{ lang('DONATION_HKD') }}</option>
 					</select>
 				</div>
 				<fieldset id="contactpaypal" class="submit-buttons">
-					<input type="reset" class="button2" name="reset" value="{L_RESET}" />
-					<input type="submit" class="button1" name="submit" value="{L_SUBMIT}" onclick="JavaScript:document.getElementById('contactpaypal').style.display='none';document.getElementById('processingpaypal').style.display='block';" />
+					<input type="reset" class="button2" name="reset" value="{{ lang('RESET') }}" />
+					<input type="submit" class="button1" name="submit" value="{{ lang('SUBMIT') }}" onclick="JavaScript:document.getElementById('contactpaypal').style.display='none';document.getElementById('processingpaypal').style.display='block';" />
 				</fieldset>
 				<fieldset id="processingpaypal" class="submit-buttons">
-					<input type="submit" class="button1" name="submit" value="{L_DONATION_CONTACT_PAYPAL}" />
+					<input type="submit" class="button1" name="submit" value="{{ lang('DONATION_CONTACT_PAYPAL') }}" />
 				</fieldset>
 			</form>
 		</div>
 	</div>
 </div>
 
-<!-- INCLUDE overall_footer.html -->
+{% INCLUDE 'overall_footer.html' %}

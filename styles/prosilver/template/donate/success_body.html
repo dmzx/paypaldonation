@@ -1,11 +1,11 @@
-<!-- INCLUDE overall_header.html -->
+{% INCLUDE 'overall_header.html' %}
 
-<h2>{L_DONATION_SUCCESSFULL_TITLE}</h2>
+<h2>{{ lang('DONATION_SUCCESSFULL_TITLE') }}</h2>
 
 <div class="panel">
 	<div class="inner">
-		<!-- IF DONATION_SUCCESS -->{DONATION_SUCCESS}<!-- ELSE --><p>{L_DONATION_SUCCESS_DEFAULT}</p><!-- ENDIF -->
+		{% if DONATION_SUCCESS %}{{ DONATION_SUCCESS }}{% else %}<p>{{ lang('DONATION_SUCCESS_DEFAULT') }}</p>{% endif %}
 	</div>
 </div>
 
-<!-- INCLUDE overall_footer.html -->
+{% INCLUDE 'overall_footer.html' %}

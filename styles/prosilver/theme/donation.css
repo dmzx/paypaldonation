@@ -1,11 +1,3 @@
-.icon-donate {
-	background-position: 0 50%;
-	background-repeat: no-repeat;
-	background-image: none;
-	padding: 1px 0 0 1px;
-	background-image: url("./images/icon_donate.gif");
-}
-
 .grey {
 	background: url('./images/prog_grey.png') repeat-x; 
 	background-color: #cccccc; 

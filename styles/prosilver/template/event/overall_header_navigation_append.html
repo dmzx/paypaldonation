@@ -1,8 +1,8 @@
-<!-- IF S_DONATE_ENABLED -->
-<li <!-- IF not PHPBB_IS_32 -->class="small-icon icon-donate"<!-- ENDIF --> data-last-responsive="true">
-	<a href="{U_DONATE}" title="{L_DONATEINDEX}" role="menuitem">
-		<i<!-- IF PHPBB_IS_32 --> class="icon fa fa-heart"<!-- ENDIF --> aria-hidden="true"></i>
-		<span>{L_DONATEINDEX}</span>
+{% if S_DONATE_ENABLED %}
+<li data-last-responsive="true">
+	<a href="{{ U_DONATE }}" title="{{ lang('DONATEINDEX') }}" role="menuitem">
+		<i class="icon fa-heart fa-fw" aria-hidden="true"></i><span>{{ lang('DONATEINDEX') }}</span>
 	</a>
 </li>
-<!-- ENDIF -->
+{% endif %}
+

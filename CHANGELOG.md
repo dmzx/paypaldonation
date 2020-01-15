@@ -1,4 +1,9 @@
-## Changelog
+## Paypal Donation Changelog
+
+### 1.0.4 - 2020-01-15
+
+- Drop support for 3.1.
+- Twig update.
 
 ### 1.0.3 - 2017-03-08
 

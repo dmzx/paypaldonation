@@ -4,7 +4,7 @@
 * Paypal Donation extension for the phpBB Forum Software package.
 * French translation by Galixte (http://www.galixte.com)
 *
-* @copyright (c) 2017 dmzx <http://www.dmzx-web.net>
+* @copyright (c) 2017 dmzx <https://www.dmzx-web.net>
 * @license GNU General Public License, version 2 (GPL-2.0)
 *
 */

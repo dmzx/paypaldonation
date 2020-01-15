@@ -2,7 +2,7 @@
 /**
 *
 * @package phpBB Extension - Paypal Donation
-* @copyright (c) 2016 dmzx - http://www.dmzx-web.net
+* @copyright (c) 2016 dmzx - https://www.dmzx-web.net
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
@@ -28,9 +28,6 @@ class listener implements EventSubscriberInterface
 	/** @var string */
 	protected $php_ext;
 
-	/** @var \phpbb\files\factory */
-	protected $files_factory;
-
 	/**
 	* Constructor
 	*
@@ -39,15 +36,13 @@ class listener implements EventSubscriberInterface
 	* @param \phpbb\template\template			$template
 	* @param \phpbb\user						$user
 	* @param string							 	$php_ext
-	* @param \phpbb\files\factory				$files_factory
 	*/
 	public function __construct(
 		\phpbb\config\config $config,
 		\phpbb\controller\helper $helper,
 		\phpbb\template\template $template,
 		\phpbb\user $user,
-		$php_ext,
-		\phpbb\files\factory $files_factory = null
+		$php_ext
 	)
 	{
 		$this->config 			= $config;
@@ -55,7 +50,6 @@ class listener implements EventSubscriberInterface
 		$this->template 		= $template;
 		$this->user 			= $user;
 		$this->php_ext	 		= $php_ext;
-		$this->files_factory 	= $files_factory;
 	}
 
 	static public function getSubscribedEvents()
@@ -85,7 +79,6 @@ class listener implements EventSubscriberInterface
 		$this->template->assign_vars(array(
 			'U_DONATE' 				=> $this->helper->route('dmzx_donation_controller'),
 			'S_DONATE_ENABLED'		=> (isset($this->config['donation_enable'])) ? $this->config['donation_enable']:false,
-			'PHPBB_IS_32'			=> ($this->files_factory !== null) ? true : false,
 		));
 	}
 

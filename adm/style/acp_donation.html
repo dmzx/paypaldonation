@@ -1,100 +1,101 @@
-<!-- INCLUDE overall_header.html -->
+{% INCLUDE 'overall_header.html' %}
 
-<h1>{L_ACP_DONATION_EXT}</h1>
-<p>{L_DONATION_VERSION} {DONATION_VERSION}</p>
+<h1>{{ lang('ACP_DONATION_EXT') }}</h1>
 
-<form id="acp_donation" method="post" action="{U_ACTION}">
+<p><img src="https://img.shields.io/badge/{{ lang('DONATION_VERSION') }}-{{ DONATION_VERSION }}-green.svg?style=plastic" /></p>
+
+<form id="acp_donation" method="post" action="{{ U_ACTION }}">
 	<fieldset>
-		<legend>{L_DONATION_SETTINGS}</legend>
+		<legend>{{ lang('DONATION_SETTINGS') }}</legend>
 		<dl>
-			<dt><label for="donation_enable">{L_DONATION_ENABLE}{L_COLON}</label><br />
-			<span>{L_DONATION_ENABLE_EXPLAIN}</span></dt>
-			<dd><label><input type="radio" class="radio" name="donation_enable" value="1"<!-- IF DONATION_ENABLE --> id="donation_enable" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-			<label><input type="radio" class="radio" name="donation_enable" value="0"<!-- IF not DONATION_ENABLE --> id="donation_enable" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+			<dt><label for="donation_enable">{{ lang('DONATION_ENABLE') }}{{ lang('COLON') }}</label><br />
+			<span>{{ lang('DONATION_ENABLE_EXPLAIN') }}</span></dt>
+			<dd><label><input type="radio" class="radio" name="donation_enable" value="1"{% if DONATION_ENABLE %} id="donation_enable" checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+			<label><input type="radio" class="radio" name="donation_enable" value="0"{% if not DONATION_ENABLE %} id="donation_enable" checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
 		</dl>
 		<dl>
-			<dt><label for="donation_email">{L_DONATION_EMAIL}{L_COLON}</label><br />
-			<span>{L_DONATION_EMAIL_EXPLAIN}</span></dt>
-			<dd><input type="text" name="donation_email" size="40" value="{DONATION_EMAIL}" /></dd>
+			<dt><label for="donation_email">{{ lang('DONATION_EMAIL') }}{{ lang('COLON') }}</label><br />
+			<span>{{ lang('DONATION_EMAIL_EXPLAIN') }}</span></dt>
+			<dd><input type="text" name="donation_email" size="40" value="{{ DONATION_EMAIL }}" /></dd>
 		</dl>
 	</fieldset>
 	<fieldset>
-		<legend>{L_DONATION_STATS_SETTINGS}</legend>
+		<legend>{{ lang('DONATION_STATS_SETTINGS') }}</legend>
 		<dl>
-			<dt><label for="donation_index_enable">{L_DONATION_INDEX_ENABLE}{L_COLON}</label><br />
-			<span>{L_DONATION_INDEX_ENABLE_EXPLAIN}</span></dt>
-			<dd><label><input type="radio" class="radio" name="donation_index_enable" value="1"<!-- IF DONATION_INDEX_ENABLE --> id="donation_index_enable" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-			<label><input type="radio" class="radio" name="donation_index_enable" value="0"<!-- IF not DONATION_INDEX_ENABLE --> id="donation_index_enable" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+			<dt><label for="donation_index_enable">{{ lang('DONATION_INDEX_ENABLE') }}{{ lang('COLON') }}</label><br />
+			<span>{{ lang('DONATION_INDEX_ENABLE_EXPLAIN') }}</span></dt>
+			<dd><label><input type="radio" class="radio" name="donation_index_enable" value="1"{% if DONATION_INDEX_ENABLE %} id="donation_index_enable" checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+			<label><input type="radio" class="radio" name="donation_index_enable" value="0"{% if not DONATION_INDEX_ENABLE %} id="donation_index_enable" checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
 		</dl>
 		<dl>
-			<dt><label for="donation_index_top">{L_DONATION_INDEX_TOP}{L_COLON}</label><br />
-			<span>{L_DONATION_INDEX_TOP_EXPLAIN}</span></dt>
-			<dd><label><input type="radio" class="radio" name="donation_index_top" value="1"<!-- IF DONATION_INDEX_TOP --> id="donation_index_top" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-			<label><input type="radio" class="radio" name="donation_index_top" value="0"<!-- IF not DONATION_INDEX_TOP --> id="donation_index_top" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+			<dt><label for="donation_index_top">{{ lang('DONATION_INDEX_TOP') }}{{ lang('COLON') }}</label><br />
+			<span>{{ lang('DONATION_INDEX_TOP_EXPLAIN') }}</span></dt>
+			<dd><label><input type="radio" class="radio" name="donation_index_top" value="1"{% if DONATION_INDEX_TOP %} id="donation_index_top" checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+			<label><input type="radio" class="radio" name="donation_index_top" value="0"{% if not DONATION_INDEX_TOP %} id="donation_index_top" checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
 		</dl>
 		<dl>
-			<dt><label for="donation_index_bottom">{L_DONATION_INDEX_BOTTOM}{L_COLON}</label><br />
-			<span>{L_DONATION_INDEX_BOTTOM_EXPLAIN}</span></dt>
-			<dd><label><input type="radio" class="radio" name="donation_index_bottom" value="1"<!-- IF DONATION_INDEX_BOTTOM --> id="donation_index_bottom" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-			<label><input type="radio" class="radio" name="donation_index_bottom" value="0"<!-- IF not DONATION_INDEX_BOTTOM --> id="donation_index_bottom" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+			<dt><label for="donation_index_bottom">{{ lang('DONATION_INDEX_BOTTOM') }}{{ lang('COLON') }}</label><br />
+			<span>{{ lang('DONATION_INDEX_BOTTOM_EXPLAIN') }}</span></dt>
+			<dd><label><input type="radio" class="radio" name="donation_index_bottom" value="1"{% if DONATION_INDEX_BOTTOM %} id="donation_index_bottom" checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+			<label><input type="radio" class="radio" name="donation_index_bottom" value="0"{% if not DONATION_INDEX_BOTTOM %} id="donation_index_bottom" checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
 		</dl>
 		<dl>
-			<dt><label for="donation_achievement_enable">{L_DONATION_ACHIEVEMENT_ENABLE}{L_COLON}</label><br />
-			<span>{L_DONATION_ACHIEVEMENT_ENABLE_EXPLAIN}</span></dt>
-			<dd><label><input type="radio" class="radio" name="donation_achievement_enable" value="1"<!-- IF DONATION_ACHIEVEMENT_ENABLE --> id="donation_achievement_enable" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-			<label><input type="radio" class="radio" name="donation_achievement_enable" value="0"<!-- IF not DONATION_ACHIEVEMENT_ENABLE --> id="donation_achievement_enable" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+			<dt><label for="donation_achievement_enable">{{ lang('DONATION_ACHIEVEMENT_ENABLE') }}{{ lang('COLON') }}</label><br />
+			<span>{{ lang('DONATION_ACHIEVEMENT_ENABLE_EXPLAIN') }}</span></dt>
+			<dd><label><input type="radio" class="radio" name="donation_achievement_enable" value="1"{% if DONATION_ACHIEVEMENT_ENABLE %} id="donation_achievement_enable" checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+			<label><input type="radio" class="radio" name="donation_achievement_enable" value="0"{% if not DONATION_ACHIEVEMENT_ENABLE %} id="donation_achievement_enable" checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
 		</dl>
 		<dl>
-			<dt><label for="donation_achievement">{L_DONATION_ACHIEVEMENT}{L_COLON}</label><br />
-			<span>{L_DONATION_ACHIEVEMENT_EXPLAIN}</span></dt>
-			<dd><input type="text" name="donation_achievement" size="10" value="{DONATION_ACHIEVEMENT}" /></dd>
+			<dt><label for="donation_achievement">{{ lang('DONATION_ACHIEVEMENT') }}{{ lang('COLON') }}</label><br />
+			<span>{{ lang('DONATION_ACHIEVEMENT_EXPLAIN') }}</span></dt>
+			<dd><input type="text" name="donation_achievement" size="10" value="{{ DONATION_ACHIEVEMENT }}" /></dd>
 		</dl>
 		<dl>
-			<dt><label for="donation_goal_enable">{L_DONATION_GOAL_ENABLE}{L_COLON}</label><br />
-			<span>{L_DONATION_GOAL_ENABLE_EXPLAIN}</span></dt>
-			<dd><label><input type="radio" class="radio" name="donation_goal_enable" value="1"<!-- IF DONATION_GOAL_ENABLE --> id="donation_goal_enable" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
-			<label><input type="radio" class="radio" name="donation_goal_enable" value="0"<!-- IF not DONATION_GOAL_ENABLE --> id="donation_goal_enable" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+			<dt><label for="donation_goal_enable">{{ lang('DONATION_GOAL_ENABLE') }}{{ lang('COLON') }}</label><br />
+			<span>{{ lang('DONATION_GOAL_ENABLE_EXPLAIN') }}</span></dt>
+			<dd><label><input type="radio" class="radio" name="donation_goal_enable" value="1"{% if DONATION_GOAL_ENABLE %} id="donation_goal_enable" checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+			<label><input type="radio" class="radio" name="donation_goal_enable" value="0"{% if not DONATION_GOAL_ENABLE %} id="donation_goal_enable" checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
 		</dl>
 		<dl>
-			<dt><label for="donation_goal">{L_DONATION_GOAL}{L_COLON}</label><br />
-			<span>{L_DONATION_GOAL_EXPLAIN}</span></dt>
-			<dd><input type="text" name="donation_goal" size="10" value="{DONATION_GOAL}" /></dd>
+			<dt><label for="donation_goal">{{ lang('DONATION_GOAL') }}{{ lang('COLON') }}</label><br />
+			<span>{{ lang('DONATION_GOAL_EXPLAIN') }}</span></dt>
+			<dd><input type="text" name="donation_goal" size="10" value="{{ DONATION_GOAL }}" /></dd>
 		</dl>
 		<dl>
-			<dt><label for="donation_goal_currency">{L_DONATION_GOAL_CURRENCY}{L_COLON}</label><br />
-			<span>{L_DONATION_GOAL_CURRENCY_EXPLAIN}</span></dt>
-			<dd><input type="text" name="donation_goal_currency" size="10" value="{DONATION_GOAL_CURRENCY}" /></dd>
+			<dt><label for="donation_goal_currency">{{ lang('DONATION_GOAL_CURRENCY') }}{{ lang('COLON') }}</label><br />
+			<span>{{ lang('DONATION_GOAL_CURRENCY_EXPLAIN') }}</span></dt>
+			<dd><input type="text" name="donation_goal_currency" size="10" value="{{ DONATION_GOAL_CURRENCY }}" /></dd>
 		</dl>
 	</fieldset>
 	<fieldset>
-		<legend>{L_DONATION_BODY_SETTINGS}</legend>
+		<legend>{{ lang('DONATION_BODY_SETTINGS') }}</legend>
 			<dl>
-				<dt><label for="donation_body">{L_DONATION_BODY}{L_COLON}</label><br />
-				<span>{L_DONATION_BODY_EXPLAIN}</span></dt>
-				<dd><textarea id="donation_body" name="donation_body" rows="8" cols="45">{DONATION_BODY}</textarea></dd>
+				<dt><label for="donation_body">{{ lang('DONATION_BODY') }}{{ lang('COLON') }}</label><br />
+				<span>{{ lang('DONATION_BODY_EXPLAIN') }}</span></dt>
+				<dd><textarea id="donation_body" name="donation_body" rows="8" cols="45">{{ DONATION_BODY }}</textarea></dd>
 			</dl>
 	</fieldset>
 	<fieldset>
-		<legend>{L_DONATION_SUCCESS_SETTINGS}</legend>
+		<legend>{{ lang('DONATION_SUCCESS_SETTINGS') }}</legend>
 			<dl>
-				<dt><label for="donation_success">{L_DONATION_SUCCESS}{L_COLON}</label><br />
-				<span>{L_DONATION_SUCCESS_EXPLAIN}</span></dt>
-				<dd><textarea id="donation_success" name="donation_success" rows="8" cols="45">{DONATION_SUCCESS}</textarea></dd>
+				<dt><label for="donation_success">{{ lang('DONATION_SUCCESS') }}{{ lang('COLON') }}</label><br />
+				<span>{{ lang('DONATION_SUCCESS_EXPLAIN') }}</span></dt>
+				<dd><textarea id="donation_success" name="donation_success" rows="8" cols="45">{{ DONATION_SUCCESS }}</textarea></dd>
 			</dl>
 	</fieldset>
 	<fieldset>
-		<legend>{L_DONATION_CANCEL_SETTINGS}</legend>
+		<legend>{{ lang('DONATION_CANCEL_SETTINGS') }}</legend>
 			<dl>
-				<dt><label for="donation_cancel">{L_DONATION_CANCEL}{L_COLON}</label><br />
-				<span>{L_DONATION_CANCEL_EXPLAIN}</span></dt>
-				<dd><textarea id="donation_cancel" name="donation_cancel" rows="8" cols="45">{DONATION_CANCEL}</textarea></dd>
+				<dt><label for="donation_cancel">{{ lang('DONATION_CANCEL') }}{{ lang('COLON') }}</label><br />
+				<span>{{ lang('DONATION_CANCEL_EXPLAIN') }}</span></dt>
+				<dd><textarea id="donation_cancel" name="donation_cancel" rows="8" cols="45">{{ DONATION_CANCEL }}</textarea></dd>
 			</dl>
 	</fieldset>
 	<p class="submit-buttons">
-		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
-		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{{ lang('RESET') }}" />
 	</p>
-	{S_FORM_TOKEN}
+	{{ S_FORM_TOKEN }}
 </form>
 
-<!-- INCLUDE overall_footer.html -->
+{% INCLUDE 'overall_footer.html' %}
