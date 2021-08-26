@@ -1,6 +1,6 @@
 services:
     dmzx.donation.controller:
-        class: dmzx\donation\controller\donation
+        class: 'dmzx\donation\controller\donation'
         arguments:
             - '@config'
             - '@controller.helper'
@@ -10,7 +10,7 @@ services:
             - '@request'
             - '@config_text'
     dmzx.donation.admin.controller:
-        class: dmzx\donation\controller\admin_controller
+        class: 'dmzx\donation\controller\admin_controller'
         arguments:
             - '@config'
             - '@template'
@@ -20,7 +20,7 @@ services:
             - '@request'
             - '@config_text'
     dmzx.donation.listener:
-        class: dmzx\donation\event\listener
+        class: 'dmzx\donation\event\listener'
         arguments:
             - '@config'
             - '@controller.helper'
@@ -28,4 +28,4 @@ services:
             - '@user'
             - '%core.php_ext%'
         tags:
-            - { name: event.listener }
+            - { name: 'event.listener' }
