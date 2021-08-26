@@ -14,7 +14,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -32,7 +32,7 @@ if (empty($lang) || !is_array($lang))
 // Some characters for use
 // ’ » “ ” …
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'DONATION_SAVED'						=> 'Donatie instellingen opgeslagen',
 	'DONATION_VERSION'						=> 'Versie',
 	'DONATION_SETTINGS'						=> 'Globale Donatie Configuratie',
@@ -66,4 +66,4 @@ $lang = array_merge($lang, array(
 	'DONATION_CANCEL_SETTINGS'				=> 'Donatie geannuleerd configuratie',
 	'DONATION_CANCEL'						=> 'Donatie annulering tekst',
 	'DONATION_CANCEL_EXPLAIN'				=> 'Plaats hier te tekst die je wenst te tonen op de donatie pagina.<br>Dit is de pagina waarnaar gebruikers doorgestuurd worden na een geannuleerde donatie.<br><br>HTML is toegestaan.',
-));
+]);

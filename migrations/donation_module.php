@@ -15,19 +15,19 @@ class donation_module extends migration
 {
 	public function update_data()
 	{
-		return array(
-			array('module.add', array(
+		return [
+			['module.add', [
 				'acp',
 				'ACP_CAT_DOT_MODS',
 				'ACP_DONATION_EXT',
-			)),
-			array('module.add', array(
+			]],
+			['module.add', [
 				'acp',
-				'ACP_DONATION_EXT', array(
+				'ACP_DONATION_EXT', [
 					'module_basename'	=> '\dmzx\donation\acp\acp_donation_module',
-					'modes' 			=> array('configuration'),
-				),
-			)),
-		);
+					'modes' 			=> ['configuration'],
+				],
+			]],
+		];
 	}
 }

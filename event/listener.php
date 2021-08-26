@@ -58,12 +58,12 @@ class listener implements EventSubscriberInterface
 
 	static public function getSubscribedEvents()
 	{
-		return array(
+		return [
 			'core.viewonline_overwrite_location'	=> 'viewonline_page',
 			'core.page_header'						=> 'add_page_header_links',
 			'core.index_modify_page_title'			=> 'index_modify_page_title',
 			'core.user_setup'						=> 'load_language_on_setup',
-		);
+		];
 	}
 
 	public function viewonline_page($event)
@@ -80,15 +80,15 @@ class listener implements EventSubscriberInterface
 
 	public function add_page_header_links($event)
 	{
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'U_DONATE' 				=> $this->helper->route('dmzx_donation_controller'),
 			'S_DONATE_ENABLED'		=> (isset($this->config['donation_enable'])) ? $this->config['donation_enable']:false,
-		));
+		]);
 	}
 
 	public function index_modify_page_title($event)
 	{
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'DONATION_ACHIEVEMENT_ENABLE'		=> (isset($this->config['donation_achievement_enable'])) ? $this->config['donation_achievement_enable']:false,
 			'DONATION_ACHIEVEMENT'				=> (isset($this->config['donation_achievement'])) ? $this->config['donation_achievement']:false,
 			'DONATION_INDEX_ENABLE'				=> (isset($this->config['donation_index_enable'])) ? $this->config['donation_index_enable']:false,
@@ -99,27 +99,27 @@ class listener implements EventSubscriberInterface
 			'S_DONATE_ENABLED'					=> (isset($this->config['donation_enable'])) ? $this->config['donation_enable']:false,
 			'L_DONATION_ACHIEVED'				=> $this->user->lang('DONATION_ACHIEVED', $this->config['donation_goal_currency'], $this->config['donation_achievement']),
 			'L_DONATION_GOAL'					=> $this->user->lang('DONATION_GOAL_ACHIEVED', $this->config['donation_goal_currency'], $this->config['donation_goal']),
-		));
+		]);
 
 		if (!empty($this->config['donation_goal_enable']) && $this->config['donation_goal'] > 0)
 		{
 			$donation_goal_number = ($this->config['donation_achievement'] * 100) / $this->config['donation_goal'];
 			$donation_goal_rest = $this->config['donation_goal'] - $this->config['donation_achievement'];
 
-			$this->template->assign_vars(array(
+			$this->template->assign_vars([
 				'DONATION_GOAL_NUMBER'		=> round($donation_goal_number),
 				'DONATION_GOAL_REST'		=> $donation_goal_rest,
-			));
+			]);
 		}
 	}
 
 	public function load_language_on_setup($event)
 	{
 		$lang_set_ext = $event['lang_set_ext'];
-		$lang_set_ext[] = array(
+		$lang_set_ext[] = [
 			'ext_name' => 'dmzx/donation',
 			'lang_set' => 'common',
-		);
+		];
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 }

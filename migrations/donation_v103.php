@@ -15,16 +15,16 @@ class donation_v103 extends migration
 {
 	static public function depends_on()
 	{
-		return array(
+		return [
 			'\dmzx\donation\migrations\donation_schema',
-		);
+		];
 	}
 
 	public function update_data()
 	{
-		return array(
-			array('config.update', array('donation_version', '1.0.3')),
-			array('config.remove', array('donation_goal_currency_enable')),
-		);
+		return [
+			['config.update', ['donation_version', '1.0.3']],
+			['config.remove', ['donation_goal_currency_enable']],
+		];
 	}
 }

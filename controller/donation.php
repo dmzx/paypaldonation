@@ -45,7 +45,7 @@ class donation
 	* Constructor
 	*
 	* @param config				$config
-	* @param helper			    $helper
+	* @param helper				$helper
 	* @param template			$template
 	* @param user				$user
 	* @param driver_interface	$db
@@ -83,11 +83,11 @@ class donation
 			throw new http_exception(403, 'DONATION_DISABLED_EMAIL');
 		}
 
-		$data = $this->config_text->get_array(array(
+		$data = $this->config_text->get_array([
 			'donation_body',
 			'donation_cancel',
 			'donation_success',
-		));
+		]);
 
 		$success_url	= $this->generate_return_url('success');
 		$cancel_url		= $this->generate_return_url('cancel');
@@ -96,13 +96,13 @@ class donation
 		if (!empty($this->config['donation_goal_enable']) && $this->config['donation_goal'] > 0)
 		{
 			$donation_goal_number = ($this->config['donation_achievement'] * 100) / $this->config['donation_goal'];
-			$this->template->assign_vars(array(
+			$this->template->assign_vars([
 				'DONATION_GOAL_NUMBER'	=> round($donation_goal_number),
-			));
+			]);
 		}
 
 		// Lets build a page ...
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'U_DONATE_SUCCESS'					=> $success_url,
 			'U_DONATE_CANCEL'					=> $cancel_url,
 			'DONATION_EMAIL'					=> $this->config['donation_email'],
@@ -115,13 +115,13 @@ class donation
 			'DONATION_SUCCESS'					=> html_entity_decode($data['donation_success']),
 			'L_DONATION_ACHIEVED'				=> $this->user->lang('DONATION_ACHIEVED', $this->config['donation_goal_currency'], $this->config['donation_achievement']),
 			'L_DONATION_GOAL'					=> $this->user->lang('DONATION_GOAL_ACHIEVED', $this->config['donation_goal_currency'], $this->config['donation_goal']),
-		));
+		]);
 
 		// Set up Navlinks
-		$this->template->assign_block_vars('navlinks', array(
+		$this->template->assign_block_vars('navlinks', [
 			'FORUM_NAME' 	=> $this->user->lang('DONATION_TITLE'),
 			'U_VIEW_FORUM' 	=> $this->helper->route('dmzx_donation_controller'),
-		));
+		]);
 
 		switch ($mode)
 		{
@@ -142,6 +142,6 @@ class donation
 	*/
 	private function generate_return_url($arg)
 	{
-		return generate_board_url(true) . $this->helper->route('dmzx_donation_controller', array('mode' => $arg));
+		return generate_board_url(true) . $this->helper->route('dmzx_donation_controller', ['mode' => $arg]);
 	}
 }

@@ -47,11 +47,11 @@ class admin_controller
 	 * Constructor
 	 *
 	 * @param config				$config
-	 * @param template			    $template
+	 * @param template				$template
 	 * @param log_interface			$log
 	 * @param user					$user
-	 * @param driver_interface	    $db
-	 * @param request			    $request
+	 * @param driver_interface		$db
+	 * @param request				$request
 	 * @param db_text				$config_text
 	 */
 	public function __construct(
@@ -83,11 +83,11 @@ class admin_controller
 	{
 		add_form_key('acp_donation');
 
-		$data = $this->config_text->get_array(array(
+		$data = $this->config_text->get_array([
 			'donation_body',
 			'donation_cancel',
 			'donation_success',
-		));
+		]);
 
 		// Is the form being submitted to us?
 		if ($this->request->is_set_post('submit'))
@@ -102,11 +102,11 @@ class admin_controller
 			$data['donation_success'] 	= $this->request->variable('donation_success', '', true);
 
 			// Store the settings to the config_table in the database
-			$this->config_text->set_array(array(
+			$this->config_text->set_array([
 				'donation_body'			=> $data['donation_body'],
 				'donation_cancel'		=> $data['donation_cancel'],
 				'donation_success'		=> $data['donation_success'],
-			));
+			]);
 
 			// Set the options the user configured
 			$this->set_options();
@@ -119,7 +119,7 @@ class admin_controller
 
 		$donation_version = isset($this->config['donation_version']) ? $this->config['donation_version'] : '';
 
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'DONATION_VERSION'					=> $donation_version,
 			'DONATION_ENABLE'					=> $this->config['donation_enable'],
 			'DONATION_INDEX_ENABLE'				=> $this->config['donation_index_enable'],
@@ -136,7 +136,7 @@ class admin_controller
 			'DONATION_SUCCESS'					=> $data['donation_success'],
 
 			'U_ACTION'							=> $this->u_action,
-		));
+		]);
 	}
 
 	/**

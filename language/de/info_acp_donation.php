@@ -15,7 +15,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -33,9 +33,9 @@ if (empty($lang) || !is_array($lang))
 // Some characters for use
 // ‚ ‘ ’ « » „ “ ” …
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'ACP_DONATION_EXT'				=> 'Spenden Extension',
 	'ACP_DONATION_CONFIG'			=> 'Konfiguration',
 	//Log
 	'LOG_DONATION_SAVED'			=> '<strong>Spendeneinstellungen gespeichert</strong>',
-));
+]);

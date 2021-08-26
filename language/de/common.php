@@ -15,7 +15,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -33,7 +33,7 @@ if (empty($lang) || !is_array($lang))
 // Some characters for use
 // ‚ ‘ ’ « » „ “ ” …
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'DONATEINDEX'							=> 'Spenden',
 	'VIEWING_DONATE'						=> 'Betrachtet Spendenseite',
 	'DONATION_DISABLED'						=> 'Entschuldige, die Spendenseite ist derzeit nicht verfügbar',
@@ -56,4 +56,4 @@ $lang = array_merge($lang, array(
 	'DONATION_HKD'							=> '$ HKD',
 	'DONATION_ACHIEVED'						=> 'Wir haben %1$s <strong>%2$s</strong> an Spenden erhalten.',
 	'DONATION_GOAL_ACHIEVED'				=> 'Unser Ziel ist, %1$s <strong>%2$s</strong> zu erreichen.',
-));
+]);

@@ -15,25 +15,25 @@ class donation_schema extends migration
 {
 	public function update_data()
 	{
-		return array(
+		return [
 			// Add configs
-			array('config.add', array('donation_version', '1.0.2')),
-			array('config.add', array('donation_enable', 1)),
-			array('config.add', array('donation_email', '')),
-			array('config.add', array('donation_achievement_enable', 0)),
-			array('config.add', array('donation_achievement', 0)),
-			array('config.add', array('donation_goal_enable', 0)),
-			array('config.add', array('donation_goal', 0)),
-			array('config.add', array('donation_goal_currency_enable', 0)),
-			array('config.add', array('donation_goal_currency', '')),
-			array('config.add', array('donation_index_enable', 0)),
-			array('config.add', array('donation_index_top', 0)),
-			array('config.add', array('donation_index_bottom', 0)),
+			['config.add', ['donation_version', '1.0.2']],
+			['config.add', ['donation_enable', 1]],
+			['config.add', ['donation_email', '']],
+			['config.add', ['donation_achievement_enable', 0]],
+			['config.add', ['donation_achievement', 0]],
+			['config.add', ['donation_goal_enable', 0]],
+			['config.add', ['donation_goal', 0]],
+			['config.add', ['donation_goal_currency_enable', 0]],
+			['config.add', ['donation_goal_currency', '']],
+			['config.add', ['donation_index_enable', 0]],
+			['config.add', ['donation_index_top', 0]],
+			['config.add', ['donation_index_bottom', 0]],
 
 			// Add our config_text table settings
-			array('config_text.add', array('donation_body', '')),
-			array('config_text.add', array('donation_cancel', '')),
-			array('config_text.add', array('donation_success', '')),
-		);
+			['config_text.add', ['donation_body', '']],
+			['config_text.add', ['donation_cancel', '']],
+			['config_text.add', ['donation_success', '']],
+		];
 	}
 }

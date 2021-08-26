@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -38,7 +38,7 @@ if (empty($lang) || !is_array($lang))
 // ’ « » “ ” …
 //
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'DONATION_SAVED'						=> 'Les paramètres de l’extension « Paypal Donation » ont été sauvegardés avec succès !',
 	'DONATION_VERSION'						=> 'Version',
 	'DONATION_SETTINGS'						=> 'Configuration générale de l’extension « Paypal Donation »',
@@ -72,4 +72,4 @@ $lang = array_merge($lang, array(
 	'DONATION_CANCEL_SETTINGS'				=> 'Configuration de la page d’annulation du don',
 	'DONATION_CANCEL'						=> 'Texte d’annulation du don',
 	'DONATION_CANCEL_EXPLAIN'				=> 'Permet de saisir le texte à afficher sur la page d’annulation du don.<br>Ceci est la page vers laquelle les utilisateurs sont redirigés lorsqu’ils ont annulé un don.<br><br>Le language HTML est autorisé.',
-));
+]);

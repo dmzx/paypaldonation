@@ -13,12 +13,12 @@ class acp_donation_info
 {
 	function module()
 	{
-		return array(
+		return [
 			'filename'	=> '\dmzx\donation\acp\acp_donation_module',
 			'title'		=> 'ACP_DONATION_EXT',
-			'modes'		=> array(
-				'configuration'	=> array('title' => 'ACP_DONATION_CONFIG', 	'auth' => 'ext_dmzx/donation && acl_a_board','cat' => array('ACP_DONATION_EXT')),
-			),
-		);
+			'modes'		=> [
+				'configuration'	=> ['title' => 'ACP_DONATION_CONFIG', 	'auth' => 'ext_dmzx/donation && acl_a_board','cat' => ['ACP_DONATION_EXT']],
+			],
+		];
 	}
 }

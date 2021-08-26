@@ -19,7 +19,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -38,9 +38,9 @@ if (empty($lang) || !is_array($lang))
 // ’ « » “ ” …
 //
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'ACP_DONATION_EXT'				=> 'Dons PayPal',
 	'ACP_DONATION_CONFIG'			=> 'Configuration',
 	//Log
 	'LOG_DONATION_SAVED'			=> '<strong>Paramètres de l’extension « Paypal Donation » sauvegardés</strong>',
-));
+]);

@@ -15,7 +15,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -33,7 +33,7 @@ if (empty($lang) || !is_array($lang))
 // Some characters for use
 // ‚ ‘ ’ « » „ “ ” …
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'DONATION_SAVED'						=> 'Spendeneinstellungen gespeichert',
 	'DONATION_VERSION'						=> 'Version',
 	'DONATION_SETTINGS'						=> 'Globale Spendenkonfiguration',
@@ -67,4 +67,4 @@ $lang = array_merge($lang, array(
 	'DONATION_CANCEL_SETTINGS'				=> 'Spendenabbruchs-Konfiguration',
 	'DONATION_CANCEL'						=> 'Spendenabbruchs-Text',
 	'DONATION_CANCEL_EXPLAIN'				=> 'Gib hier den Text ein, den du auf der Abbruchseite anzeigen möchtest.<br>Dies ist die Seite, wohin die Benutzer weitergeleitet werden, wenn sie einen Spendenvorgang abbrechen.<br><br>HTML ist erlaubt.',
-));
+]);

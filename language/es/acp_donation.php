@@ -15,7 +15,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -33,7 +33,7 @@ if (empty($lang) || !is_array($lang))
 // Some characters for use
 // ’ » “ ” …
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 	'DONATION_SAVED'						=> 'Ajustes de Donación guardados',
 	'DONATION_VERSION'						=> 'Versión',
 	'DONATION_SETTINGS'						=> 'Configuración global de Donación',
@@ -67,4 +67,4 @@ $lang = array_merge($lang, array(
 	'DONATION_CANCEL_SETTINGS'				=> 'Donation Cancel Config',
 	'DONATION_CANCEL'						=> 'Donation cancel text',
 	'DONATION_CANCEL_EXPLAIN'				=> 'Introduzca el texto que desea mostrar en la página de donación cancelada<br>Esta es la página a la que los usuarios son redirigidos después de cancelar una donación.<br><br>Se permite HTML.',
-));
+]);
