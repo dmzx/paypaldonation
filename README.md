@@ -1,6 +1,6 @@
 # Paypal Donation Extension
 
-[![Build Status](https://travis-ci.org/dmzx/paypaldonation.svg?branch=master)](https://travis-ci.org/dmzx/paypaldonation)
+[![Build Status](https://github.com/dmzx/paypaldonation/workflows/Tests/badge.svg)](https://github.com/phpbb-extensions/dmzx/paypaldonation)
 
 ## Install
 
