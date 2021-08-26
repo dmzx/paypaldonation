@@ -9,20 +9,24 @@
 
 namespace dmzx\donation\event;
 
+use phpbb\config\config;
+use phpbb\controller\helper;
+use phpbb\template\template;
+use phpbb\user;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
 {
-	/** @var \phpbb\config\config */
+	/** @var config */
 	protected $config;
 
-	/** @var \phpbb\template\template */
+	/** @var template */
 	protected $template;
 
-	/** @var \phpbb\controller\helper */
+	/** @var helper */
 	protected $helper;
 
-	/** @var \phpbb\user */
+	/** @var user */
 	protected $user;
 
 	/** @var string */
@@ -31,17 +35,17 @@ class listener implements EventSubscriberInterface
 	/**
 	* Constructor
 	*
-	* @param \phpbb\config\config				$config
-	* @param \phpbb\controller\helper			$helper
-	* @param \phpbb\template\template			$template
-	* @param \phpbb\user						$user
-	* @param string							 	$php_ext
+	* @param config			$config
+	* @param helper			$helper
+	* @param template		$template
+	* @param user			$user
+	* @param string			$php_ext
 	*/
 	public function __construct(
-		\phpbb\config\config $config,
-		\phpbb\controller\helper $helper,
-		\phpbb\template\template $template,
-		\phpbb\user $user,
+		config $config,
+		helper $helper,
+		template $template,
+		user $user,
 		$php_ext
 	)
 	{

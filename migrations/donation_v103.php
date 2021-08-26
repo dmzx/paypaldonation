@@ -9,7 +9,9 @@
 
 namespace dmzx\donation\migrations;
 
-class donation_v103 extends \phpbb\db\migration\migration
+use phpbb\db\migration\migration;
+
+class donation_v103 extends migration
 {
 	static public function depends_on()
 	{

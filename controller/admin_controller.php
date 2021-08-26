@@ -9,27 +9,35 @@
 
 namespace dmzx\donation\controller;
 
+use phpbb\config\config;
+use phpbb\config\db_text;
+use phpbb\db\driver\driver_interface;
+use phpbb\log\log_interface;
+use phpbb\request\request;
+use phpbb\template\template;
+use phpbb\user;
+
 class admin_controller
 {
-	/** @var \phpbb\config\config */
+	/** @var config */
 	protected $config;
 
-	/** @var \phpbb\template\template */
+	/** @var template */
 	protected $template;
 
-	/** @var \phpbb\log\log_interface */
+	/** @var log_interface */
 	protected $log;
 
-	/** @var \phpbb\user */
+	/** @var user */
 	protected $user;
 
-	/** @var \phpbb\db\driver\driver_interface */
+	/** @var driver_interface */
 	protected $db;
 
-	/** @var \phpbb\request\request */
+	/** @var request */
 	protected $request;
 
-	/** @var \phpbb\config\db_text */
+	/** @var db_text */
 	protected $config_text;
 
 	/** @var string Custom form action */
@@ -38,22 +46,22 @@ class admin_controller
 	/**
 	 * Constructor
 	 *
-	 * @param \phpbb\config\config				$config
-	 * @param \phpbb\template\template			$template
-	 * @param \\phpbb\log\log_interface			$log
-	 * @param \phpbb\user						$user
-	 * @param \phpbb\db\driver\driver_interface	$db
-	 * @param \phpbb\request\request			$request
-	 * @param \phpbb\config\db_text				$config_text
+	 * @param config				$config
+	 * @param template			    $template
+	 * @param log_interface			$log
+	 * @param user					$user
+	 * @param driver_interface	    $db
+	 * @param request			    $request
+	 * @param db_text				$config_text
 	 */
 	public function __construct(
-		\phpbb\config\config $config,
-		\phpbb\template\template $template,
-		\phpbb\log\log_interface $log,
-		\phpbb\user $user,
-		\phpbb\db\driver\driver_interface $db,
-		\phpbb\request\request $request,
-		\phpbb\config\db_text $config_text
+		config $config,
+		template $template,
+		log_interface $log,
+		user $user,
+		driver_interface $db,
+		request $request,
+		db_text $config_text
 	)
 	{
 		$this->config 			= $config;

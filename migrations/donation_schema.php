@@ -9,7 +9,9 @@
 
 namespace dmzx\donation\migrations;
 
-class donation_schema extends \phpbb\db\migration\migration
+use phpbb\db\migration\migration;
+
+class donation_schema extends migration
 {
 	public function update_data()
 	{
